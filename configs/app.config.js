@@ -9,5 +9,6 @@ module.exports = {
   url: process.env.APP_URL,
   port: process.env.APP_PORT || 3000,
   secret: process.env.APP_SECRET,
+  loginPath: "/signin",
 };
 

@@ -1,0 +1,39 @@
+<%- include('../layout/auth/header.ejs') %>
+  <div class="sign section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="sign__content">
+            <!-- authorization form -->
+            <form method="POST" class="sign__form">
+              <a href="/" class="sign__logo">
+                <img src="img/logo.svg" alt="" />
+              </a>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <% if (Object.keys(messages).length> 0) { %>
+                <script src="/js/swal.js"></script>
+                <script>
+                  <% if (messages.error) { %>
+                    swal("Something is Wrong", "<%- messages.error %>", "error");
+                   <% } %>
+                   <% if (messages.success) { %>
+                    swal("Success", "<%- messages.success[0] %>", "success");
+                    <% } %>
+                </script>
+                <% } %>
+                  <div class="sign__group">
+                    <input type="text" class="sign__input" placeholder="Email" required name="email" />
+                  </div>
+
+                  <button class="sign__btn" type="submit">send reset link</button>
+
+                  <span class="sign__text">We will send a reset link to your Email</span>
+            </form>
+            <!-- end authorization form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../layout/auth/footer.ejs') %>

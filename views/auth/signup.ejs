@@ -1,0 +1,57 @@
+<%- include('../layout/auth/header.ejs') %>
+  <div class="sign section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="sign__content">
+            <!-- registration form -->
+
+            <form class="sign__form" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <% if (Object.keys(messages).length> 0) { %>
+                <script src="/js/swal.js"></script>
+                <script>
+                  <% if (messages.error) { %>
+                    swal("Something is Wrong", "<%- messages.error %>", "error");
+                  	<% } %>
+                  	<% if (messages.success) { %>
+                    swal("Success", "<%- messages.success[0] %>", "success");
+                  		<% } %>
+                </script>
+                <% } %>
+                  <a href="/" class="sign__logo">
+                    <img src="img/logo.svg" alt="" />
+                  </a>
+
+                  <div class="sign__group">
+                    <input type="text" class="sign__input" placeholder="Username" name="username" required />
+                  </div>
+
+                  <div class="sign__group">
+                    <input type="text" class="sign__input" placeholder="Email" name="email" required />
+                  </div>
+
+                  <div class="sign__group">
+                    <input type="password" class="sign__input" placeholder="Password" name="password" required />
+                  </div>
+                  <div class="sign__group">
+                    <input type="password" class="sign__input" placeholder="Password" name="password2" required />
+                  </div>
+
+                  <div class="sign__group sign__group--checkbox">
+                    <input id="agree" name="agree" type="checkbox" checked="checked" />
+                    <label for="agree">I agree to the <a href="#">Privacy Policy</a></label>
+                  </div>
+
+                  <button class="sign__btn" type="submit">Sign up</button>
+
+                  <span class="sign__text">Already have an account? <a href="/signin">Sign in!</a></span>
+            </form>
+            <!-- registration form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../layout/auth/footer.ejs') %>

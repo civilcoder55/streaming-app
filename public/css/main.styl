@@ -1,0 +1,3361 @@
+border-radius(n)
+	-webkit-border-radius n
+	border-radius n
+
+box-shadow(args...)
+	-webkit-box-shadow args
+	box-shadow args
+
+transition(args...)
+	-webkit-transition args
+	-moz-transition args
+	transition args
+
+transform(args...)
+	-webkit-transform args
+	-moz-transform args
+	transform args
+/*----------------------------------------
+[Master Stylesheet]
+
+Project:	FlixGo
+Version:	2.0
+Primary use:	FlixGo Main Template
+----------------------------------------*/
+
+/*----------------------------------------
+[Table of contents]
+
+1. Header
+2. Home
+3. Content
+4. Section
+5. Breadcrumb
+6. Card
+7. Details
+8. FAQ
+9. How
+10. Partners
+11. Price
+12. Feature
+13. Catalog
+14. Filter
+15. Paginator
+16. Comments
+17. Reviews
+18. Form
+19.	Gallery
+20. Accordion
+21. Footer
+22. Sign
+23. Page 404
+24. Profile
+25. Contacts
+26. Plyr customization
+27. PhotoSwipe customization
+28. mCustomScrollbar customization
+----------------------------------------*/
+
+$white = #fff
+$black = #000
+$blue1 = #2b2b31
+$blue2 = #28282d
+$clr1 = #ff55a5
+$clr2 = #ff5860
+
+/*==============================
+	Common styles
+==============================*/
+html
+	-webkit-text-size-adjust 100%
+	-ms-text-size-adjust 100%
+html
+body
+	height 100%
+body
+	font-family 'Ubuntu', sans-serif
+	background-color $blue1
+	font-weight normal
+	-webkit-font-smoothing antialiased
+button
+	padding 0
+	border none
+	background-color transparent
+	transition(.4s ease)
+	cursor pointer
+	&:focus
+		outline none
+a
+	transition(.4s ease)
+	&:hover
+	&:active
+	&:focus
+		outline none
+		text-decoration none
+input
+textarea
+select
+	padding 0
+	margin 0
+	border-radius(0)
+	-webkit-appearance none
+	-moz-appearance none
+	appearance none
+	box-shadow(none)
+	&:focus
+		outline none
+ul
+	margin 0
+	padding 0
+	list-style none
+
+::-moz-selection
+	background $white
+	color $black
+	text-shadow none
+::selection
+	background $white
+	color $black
+	text-shadow none
+
+::-webkit-input-placeholder
+	color rgba($white, .5)
+	opacity 1
+::-moz-placeholder
+	color rgba($white, .5)
+	opacity 1
+:-moz-placeholder
+	color rgba($white, .5)
+	opacity 1
+:-ms-input-placeholder
+	color rgba($white, .5)
+	opacity 1
+
+.tab-content > .tab-pane
+	display none
+
+.tab-content > .active
+	display block
+
+.fade
+	transition opacity 0.25s linear
+
+@media screen and (prefers-reduced-motion: reduce)
+	.fade
+		transition none
+
+.fade:not(.show)
+	opacity 0
+
+.collapse:not(.show)
+	display none
+
+.collapsing
+	position relative
+	height 0
+	overflow hidden
+	transition(height 0.4s ease)
+
+@media screen and (prefers-reduced-motion: reduce)
+	.collapsing
+		transition none
+
+.b-description_readmore_button
+	cursor pointer
+	display block
+	height 24px
+	width 100%
+	position relative
+	&:before
+		content '\f1c8'
+		font-family "Ionicons"
+		position absolute
+		display block
+		top 0
+		left 0
+		bottom 0
+		right 0
+		text-align center
+		color rgba($white, .75)
+		font-size 22px
+		line-height 24px
+		transition(.4s ease)
+	&:hover
+	&.b-description_readmore_button_active
+		&:before
+			color $clr1
+
+.body
+	&:before
+		content ''
+		position fixed
+		display block
+		top 0
+		left 0
+		right 0
+		bottom 0
+		z-index 99
+		background-color rgba($blue1, .75)
+		opacity 0
+		pointer-events none
+		transition(.4s ease)
+	&--active
+		&:before
+			z-index 99
+			opacity 1
+			pointer-events auto
+
+/*==============================
+	Header
+==============================*/
+.header
+	display block
+	position fixed
+	top 0
+	left 0
+	right 0
+	background-color $blue1
+	z-index 101
+	&__logo
+		display flex
+		justify-content center
+		align-items center
+		height 70px
+		padding 0 15px
+		background-color $blue2
+		width 110px
+		img
+			width 100%
+			max-width 100px
+			display block
+		&:hover
+			background-color $blue1
+	&__nav
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+		position fixed
+		top 70px
+		right 0
+		bottom 0
+		background-color $blue1
+		z-index 99
+		width 305px
+		padding 30px 30px 0
+		transform(translate3d(305px, 0, 0))
+		transition(.4s ease)
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		&--active
+			transform(translate3d(0, 0, 0))
+	&__nav-link
+		font-size 14px
+		font-weight 300
+		text-transform uppercase
+		color rgba($white, .75)
+		letter-spacing .2px
+		&:hover
+			color $clr1
+		&--more
+			font-weight 400
+			font-size 24px
+		&--active
+			color $clr1
+	&__nav-item
+		width 100%
+		display block
+		margin-bottom 20px
+		position relative
+		&:last-child
+			margin-bottom 0
+		&.show
+			.header__nav-link
+				color $clr1
+	&__dropdown
+		position relative
+		display block
+		width 100%
+	&__dropdown-menu
+		position absolute
+		background-color $blue1
+		padding 15px 20px
+		display block
+		width 100%
+		min-width 200px
+		text-align left
+		z-index -1
+		pointer-events none
+		opacity 0
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		transition(.4s ease)
+		margin-top 0
+		top 100%
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		li
+			padding 0
+		a
+			font-size 16px
+			color rgba($white, .75)
+			line-height 40px
+			display block
+			font-weight 300
+			&:hover
+				color $clr1
+		&.show
+			z-index 1000
+			pointer-events auto
+			opacity 1
+			margin-top 10px
+	&__wrap
+		position relative
+		background-color $blue1
+		z-index 2
+	&__search
+		display block
+		position absolute
+		bottom 0
+		left 0
+		right 0
+		height 60px
+		width 100%
+		overflow hidden
+		transition(.4s ease)
+		background-color $blue1
+		z-index 1
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		border-top 1px solid rgba($white, .05)
+		&--active
+			bottom -60px
+	&__search-content
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		height 60px
+		position relative
+		input
+			position relative
+			height 60px
+			width 100%
+			background-color $blue2
+			border none
+			padding 0 120px 0 15px
+			font-size 15px
+			color $white
+			font-family 'Open Sans', sans-serif
+		button
+			position absolute
+			height 40px
+			width 90px
+			top 10px
+			right 15px
+			border-radius(4px)
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba($clr2, .5))
+			opacity .85
+			font-size 12px
+			color $white
+			text-transform uppercase
+			font-weight 500
+			letter-spacing .6px
+			&:hover
+				color $white
+				opacity 1
+	&__content
+		display flex
+		flex-direction row
+		justify-content space-between
+		align-items center
+		height 70px
+		position relative
+	&__auth
+		display flex
+		flex-direction row
+		justify-content flex-end
+		align-items center
+		margin-right 44px
+	&__search-btn
+		color rgba($white, .75)
+		font-size 26px
+		&:hover
+		&.active
+			color $white
+	&__sign-in
+		display flex
+		justify-content center
+		align-items center
+		height 40px
+		width 40px
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		margin-left 20px
+		span
+			display none
+		i
+			color $white
+			font-size 24px
+		&:hover
+			opacity 1
+	&__btn
+		display block
+		position absolute
+		right 0
+		top 50%
+		margin-top -22px
+		width 24px
+		height 40px
+		opacity .8
+		span
+			display block
+			position absolute
+			height 2px
+			width 24px
+			background $black
+			opacity 1
+			left 0
+			transform(rotate(0deg))
+			transition(.4s ease)
+			top 13px
+			background-color $white
+			border-radius(2px)
+			&:nth-child(2)
+				top 21px
+			&:nth-child(3)
+				top 29px
+		&:hover
+			opacity 1
+		&--active
+			opacity 1
+			span:nth-child(1)
+				top 21px
+				transform(rotate(45deg))
+			span:nth-child(2)
+				opacity 0
+			span:nth-child(3)
+				top 21px
+				transform(rotate(-45deg))
+	&__lang
+		position relative
+		margin-left 20px
+		.header__dropdown-menu
+			min-width 122px
+			margin-top -10px
+			&.show
+				margin-top 0
+		.header__nav-link
+			line-height 70px
+			display block
+	@media (min-width: 360px)
+		&__logo
+			width 140px
+		&__nav
+			width 235px
+			transform(translate3d(235px, 0, 0))
+			&--active
+				transform(translate3d(0, 0, 0))
+	@media (min-width: 375px)
+		&__nav
+			width 250px
+			transform(translate3d(250px, 0, 0))
+			&--active
+				transform(translate3d(0, 0, 0))
+	@media (min-width: 414px)
+		&__nav
+			width 259px
+			transform(translate3d(259px, 0, 0))
+			&--active
+				transform(translate3d(0, 0, 0))
+	@media (min-width: 576px)
+		&__logo
+			width 150px
+			img
+				max-width 120px
+		&__sign-in
+		&__lang
+			margin-left 30px
+		&__auth
+			margin-right 54px
+		&__lang
+			.header__dropdown-menu
+				min-width 142px
+	@media (min-width: 768px)
+		&__content
+			height 90px
+		&__logo
+			height 90px
+			width 210px
+			padding 0
+			img
+				max-width 127px
+		&__auth
+			margin-right 54px
+		&__search-btn
+			font-size 30px
+		&__sign-in
+			height 50px
+			width 140px
+			margin-left 30px
+			i
+				display none
+			span
+				display block
+				font-size 13px
+				color $white
+				text-transform uppercase
+				font-weight 500
+				letter-spacing 1px
+		&__nav
+			top 90px
+			width 260px
+			transform(translate3d(260px, 0, 0))
+			&--active
+				transform(translate3d(0, 0, 0))
+		&__search-content
+			input
+				padding 0 130px 0 20px
+			button
+				right 20px
+		&__lang
+			.header__nav-link
+				line-height 90px
+	@media (min-width: 1200px)
+		&__logo
+			width 240px
+		&__sign-in
+			margin-left 45px
+		&__auth
+			margin-right 0
+		&__btn
+			display none
+		&__nav
+			transform(translate3d(0, 0, 0))
+			padding 0
+			background-color transparent
+			width auto
+			flex-direction row
+			align-items center
+			position relative
+			top auto
+			right auto
+			bottom auto
+			margin-left 50px
+			&:before
+				display none
+		&__nav-item
+			margin 0 45px 0 0
+			width auto
+			&:last-child
+				margin 0
+		&__nav-link
+			line-height 90px
+			display block
+			&--active
+				color $white
+				cursor default
+				position relative
+				&:hover
+					color $white
+				&:before
+					content ''
+					position absolute
+					bottom 0
+					left 0
+					right 0
+					height 2px
+					display block
+					background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		&__content
+			justify-content flex-start
+		&__auth
+			margin-left auto
+		&__dropdown-menu
+			margin-top -10px
+			&.show
+				margin-top 0
+		&__lang
+			margin-left 35px
+
+/*==============================
+	Home
+==============================*/
+.home
+	margin-top 70px
+	position relative
+	display block
+	background-color $blue1
+	padding 40px 0
+	overflow hidden
+	.container
+		position relative
+		z-index 2
+	&__bg
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+		z-index 1
+	&__cover
+		opacity .07
+	&__title
+		color $white
+		text-transform uppercase
+		font-weight 300
+		font-size 28px
+		margin 0
+		padding-right 70px
+		b
+			font-weight 500
+	&__carousel
+		.item
+			margin-top 25px
+		.card
+			margin-bottom 0
+	&__nav
+		font-size 38px
+		color $white
+		opacity .7
+		position absolute
+		top 50%
+		height 24px
+		margin-top -12px
+		right 15px
+		display block
+		z-index 2
+		i
+			line-height 24px
+			height 24px
+			display block
+			&:before
+				line-height 24px
+		&--prev
+			right 60px
+		&:hover
+			opacity 1
+	&--bg
+		&:before
+			content ''
+			z-index 1
+			position absolute
+			top 0
+			right 0
+			bottom 0
+			left 0
+			display block
+			background url('/img/home/home__bg.jpg') no-repeat center / cover
+			opacity .06
+	@media (min-width: 576px)
+		&__title
+			font-size 30px
+	@media (min-width: 768px)
+		margin-top 90px
+		padding 60px 0
+		&__title
+			font-size 32px
+		&__carousel
+			.item
+				margin-top 30px
+	@media (min-width: 1200px)
+		padding 70px 0
+		&__title
+			font-size 36px
+
+/*==============================
+	Content
+==============================*/
+.content
+	padding 0 0 20px
+	&__head
+		background-color $blue2
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		margin-bottom 30px
+		position relative
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		&--profile
+			&:before
+				display none
+	&__title
+		color $white
+		font-weight 300
+		font-size 28px
+		margin 20px 0 5px
+	&__tabs
+		display none
+	&__mobile-tabs
+		position relative
+		&--profile
+			margin-bottom -20px
+	&__mobile-tabs-btn
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		cursor pointer
+		height 50px
+		opacity .75
+		transition(.4s ease)
+		input
+			display block
+			position relative
+			width auto
+			background-color transparent
+			border none
+			font-size 14px
+			color $white
+			text-transform uppercase
+			cursor pointer
+			height 50px
+			margin-right 12px
+			letter-spacing .2px
+			font-weight 300
+		span
+			position relative
+			width 16px
+			height 16px
+			display block
+			&:before
+			&:after
+				content ''
+				position absolute
+				display block
+				width 16px
+				height 2px
+				background-color $white
+				left 0
+				border-radius(4px)
+				top 50%
+				transition(.4s ease)
+				margin-top -5px
+			&:after
+				margin-top 2px
+				width 10px
+		&[aria-expanded="true"]
+			opacity 1
+			span
+				&:before
+					transform(rotate(45deg))
+					margin-top -1px
+				&:after
+					margin-top -1px
+					width 16px
+					transform(rotate(-45deg))
+		&:hover
+			opacity 1
+	&__mobile-tabs-menu
+		top 100%
+		left 0
+		margin-top -10px
+		min-width 200px
+		padding 15px 20px
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		background-color $blue1
+		display block
+		transition(.4s ease)
+		position absolute
+		z-index 100
+		pointer-events none
+		opacity 0
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		a
+			display block
+			line-height 40px
+			font-size 14px
+			color rgba($white, .75)
+			position relative
+			text-transform uppercase
+			font-weight 300
+			&:hover
+				color $clr1
+			&.active
+				display none
+		&.show
+			pointer-events auto
+			opacity 1
+			margin-top 0
+	@media (min-width: 576px)
+		&__title
+			font-size 30px
+			margin 25px 0 5px
+		&__tabs
+			display flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			overflow hidden
+			li
+				margin-right 30px
+				&:last-child
+					margin-right 0
+			a
+				display block
+				line-height 50px
+				color $white
+				position relative
+				text-transform uppercase
+				font-size 14px
+				font-weight 300
+				letter-spacing .2px
+				color rgba($white, .5)
+				&:hover
+					color $white
+				&:before
+					content ''
+					position absolute
+					bottom 0
+					left 0
+					right 0
+					height 2px
+					display block
+					background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					box-shadow(none)
+					transition(.4s ease)
+					transform(translateY(2px))
+				&.active
+					color $white
+					&:before
+						transform(translateY(0))
+						box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+			&--profile
+				display none
+		&__mobile-tabs
+			display none
+			&--profile
+				display block
+	@media (min-width: 768px)
+		padding 0 0 30px
+		&__title
+			font-size 32px
+			margin 25px 0 10px
+		&__head
+			margin-bottom 50px
+		&__tabs
+			&--profile
+				display flex
+				a
+					line-height 90px
+		&__mobile-tabs
+			&--profile
+				display none
+	@media (min-width: 1200px)
+		&__title
+			font-size 36px
+		&__tabs
+			&--profile
+				li
+					margin-right 45px
+					&:last-child
+						margin-right 0
+
+/*==============================
+	Section
+==============================*/
+.section
+	padding 40px 0
+	position relative
+	&__title
+		color $white
+		font-weight 300
+		font-size 28px
+		margin-bottom 25px
+		b
+			font-weight 700
+		&--center
+			text-align center
+		&--no-margin
+			margin-bottom 10px
+	&__text
+		color rgba($white, .7)
+		font-size 16px
+		line-height 26px
+		margin-bottom 25px
+		font-family 'Open Sans', sans-serif
+		letter-spacing .2px
+		&:last-child
+			margin-bottom 0
+		&--last-with-margin
+			&:last-child
+				margin-bottom 30px
+		b
+			font-weight 600
+		a
+			color $clr1
+			&:hover
+				color $clr1
+				text-decoration underline
+	&__list
+		margin-top 25px
+		ol
+			margin-bottom 25px
+			padding-left 0
+			list-style none
+			counter-reset li
+			ol
+				margin-top 12px
+				padding-left 15px
+			h4
+				font-size 16px
+				font-weight 500
+				color rgba($white, .7)
+				display inline
+				margin-bottom 12px
+			li
+				font-size 16px
+				line-height 26px
+				color rgba($white, .7)
+				position relative
+				margin-bottom 12px
+				font-family 'Open Sans', sans-serif
+				letter-spacing .2px
+				b
+					font-weight 600
+				a
+					color $clr1
+					&:hover
+						color $clr1
+						text-decoration underline
+				&:last-child
+					margin-bottom 0
+				&:before
+					counter-increment li
+					content counters(li,".") ". "
+			&:last-child
+				margin-bottom 0
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 160px
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin 10px auto 15px
+		position relative
+		&:hover
+			opacity 1
+			color $white
+	&__wrap
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+	&--dark
+		background-color $blue2
+	&--first
+		margin-top 70px
+		.section__title
+			margin-bottom 0
+		&:before
+			content ''
+			position absolute
+			bottom 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+	@media (min-width: 576px)
+		&__title
+			font-size 30px
+	@media (min-width: 768px)
+		padding 60px 0
+		&__title
+			font-size 32px
+			margin-bottom 35px
+			&--no-margin
+				margin-bottom 20px
+		&__wrap
+			flex-direction row
+			justify-content space-between
+			align-items center
+		&__btn
+			margin 20px auto 15px
+		&--first
+			margin-top 90px
+	@media (min-width: 992px)
+		&__text
+			&--last-with-margin
+				&:last-child
+					margin-bottom 30px
+	@media (min-width: 1200px)
+		&__title
+			font-size 36px
+			&--sidebar
+				font-size 32px
+
+/*==============================
+	Breadcrumb
+==============================*/
+.breadcrumb
+	display flex
+	flex-direction row
+	justify-content flex-start
+	align-items center
+	margin-top 5px
+	&__item
+		font-size 14px
+		color rgba($white, .5)
+		transition(.4s ease)
+		position relative
+		margin-right 40px
+		font-family 'Open Sans', sans-serif
+		&:before
+			content '\f119'
+			position absolute
+			font-family "Ionicons"
+			color rgba($white, .5)
+			left 100%
+			top 0
+			font-size 22px
+			line-height 26px
+			margin-left 14px
+		&:hover
+			color $white
+		&--active
+			cursor default
+			margin-right 0
+			&:before
+				display none
+			&:hover
+				color rgba($white, .5)
+	a
+		color rgba($white, .5)
+		&:hover
+			color $clr1
+	@media (min-width: 768px)
+		margin-top 0
+		&__item
+			font-size 15px
+
+/*==============================
+	Card
+==============================*/
+.card
+	margin-bottom 30px
+	&__cover
+		position relative
+		box-shadow(none)
+		transition(.4s ease)
+		img
+			width 100%
+		&:before
+			content ''
+			position absolute
+			display block
+			top 0
+			left 0
+			right 0
+			bottom 0
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			z-index 1
+			opacity 0
+			transition(.4s ease)
+		&:hover
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+			&:before
+				opacity .65
+			.card__play
+				opacity 1
+	&__play
+		position absolute
+		display flex
+		justify-content center
+		align-items center
+		width 60px
+		height 60px
+		border 2px solid $white
+		border-radius(50%)
+		top 50%
+		left 50%
+		margin -30px 0 0 -30px
+		z-index 2
+		font-size 30px
+		color $white
+		transition(.4s ease)
+		opacity 0
+		i
+			margin 2px 0 0 3px
+		&:hover
+			color $white
+	&__content
+		position relative
+		display block
+		margin-top 10px
+	&__title
+		font-size 18px
+		font-weight 400
+		color $white
+		margin 0
+		overflow hidden
+		white-space nowrap
+		-o-text-overflow ellipsis
+		text-overflow ellipsis
+		word-wrap break-word
+		a
+			color $white
+			&:hover
+				color $white
+	&__category
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items flex-start
+		flex-wrap wrap
+		a
+			font-size 14px
+			position relative
+			background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+			-webkit-background-clip text
+			-webkit-text-fill-color transparent
+			color $clr2
+			margin-right 7px
+			opacity .8
+			font-family 'Open Sans', sans-serif
+			&:after
+				content ','
+				position absolute
+				display block
+				left 100%
+				top 0
+				background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+				-webkit-background-clip text
+				-webkit-text-fill-color transparent
+				color $clr2
+			&:last-child
+				margin-right 0
+				&:after
+					display none
+			&:hover
+				opacity 1
+	&__rate
+		font-size 16px
+		font-weight 500
+		color $white
+		position relative
+		display inline-flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		margin-top 2px
+		i
+			text-shadow 0 0 6px rgba(255, 88, 96, 0.5)
+			margin-right 5px
+			&:before
+				background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+				-webkit-background-clip text
+				-webkit-text-fill-color transparent
+				color $clr2
+	&__list
+		display none
+	&__description
+		display none
+	&__meta
+		display none
+	&--details
+		.card__cover
+			img
+				width 100%
+				max-width 270px
+			&:before
+				display none
+			&:hover
+				box-shadow(none)
+		.card__description
+			display block
+			margin-top 15px
+			font-family 'Open Sans', sans-serif
+			font-size 15px
+			line-height 25px
+			color rgba($white, .7)
+			letter-spacing .2px
+		.card__list
+			display inline-flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			margin-left 15px
+			li
+				border 1px solid rgba($white, .26)
+				padding 5px 5px 4px
+				line-height 100%
+				border-radius(4px)
+				margin-right 10px
+				font-size 12px
+				font-weight 700
+				color rgba($white, .65)
+				&:last-child
+					margin-right 0
+		.card__wrap
+			display flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			margin-top 15px
+		.card__content
+			margin-top 15px
+		.card__meta
+			margin-top 15px
+			display block
+			font-size 15px
+			line-height 24px
+			color rgba($white, .7)
+			span
+				color rgba($white, .7)
+				margin-right 7px
+			li
+				display flex
+				flex-direction row
+				justify-content flex-start
+				align-items flex-start
+				flex-wrap wrap
+				width 100%
+				font-family 'Open Sans', sans-serif
+				&:last-child
+					margin-bottom 0
+			a
+				font-size 15px
+				position relative
+				background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+				-webkit-background-clip text
+				-webkit-text-fill-color transparent
+				color $clr2
+				margin-right 7px
+				opacity .8
+				&:after
+					content ','
+					position absolute
+					display block
+					left 100%
+					top 0
+					background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+					-webkit-background-clip text
+					-webkit-text-fill-color transparent
+					color $clr2
+				&:last-child
+					margin-right 0
+					&:after
+						display none
+				&:hover
+					opacity 1
+		.card__rate
+				margin-top 0
+	@media (min-width: 576px)
+		&--list
+			.card__content
+				margin-top 0
+				height 212px
+				overflow hidden
+				position relative
+			.card__title
+				font-size 20px
+				line-height 24px
+				margin-bottom 5px
+				margin-top -4px
+			.card__rate
+				margin-top 0
+		&--details
+			.card__content
+				margin-top 0
+			.card__wrap
+				margin-top 0
+		&--big
+			.card__title
+				font-size 20px
+		&__list
+			display inline-flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			margin-left 15px
+			li
+				border 1px solid rgba($white, .1)
+				padding 5px 5px 4px
+				line-height 100%
+				border-radius(4px)
+				margin-right 10px
+				font-size 12px
+				font-weight 700
+				color rgba($white, .65)
+				&:last-child
+					margin-right 0
+		&__description
+			display block
+			margin-top 10px
+			p
+				font-family 'Open Sans', sans-serif
+				font-size 15px
+				line-height 25px
+				color rgba($white, .7)
+				margin-bottom 15px
+				letter-spacing .2px
+				&:last-child
+					margin-bottom 0
+		&__wrap
+			display flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			margin-top 10px
+	@media (min-width: 768px)
+		&--list
+			margin-bottom 50px
+			.card__content
+				height 310px
+	@media (min-width: 992px)
+		&--list
+			.card__content
+				height 190px
+	@media (min-width: 1200px)
+		&--big
+			.card__play
+				width 80px
+				height 80px
+				margin -40px 0 0 -40px
+				font-size 44px
+				i
+					margin 2px 0 0 5px
+			.card__title
+				font-size 22px
+		&--list
+			.card__title
+				font-size 22px
+			.card__content
+				height 237px
+		&--details
+			margin-bottom 0
+		&--series
+			margin-bottom 30px
+
+/*==============================
+	Details
+==============================*/
+.details
+	position relative
+	margin-top 70px
+	&__bg
+		position absolute
+		display block
+		top 0
+		right 0
+		left 0
+		height 400px
+		z-index 1
+		opacity .07
+	&:before
+		content ''
+		position absolute
+		display block
+		top 0
+		left 0
+		right 0
+		height 400px
+		z-index 2
+		background -moz-linear-gradient(top, rgba(43,43,49,0) 0%, rgba(43,43,49,1) 100%)
+		background -webkit-linear-gradient(top, rgba(43,43,49,0) 0%,rgba(43,43,49,1) 100%)
+		background linear-gradient(to bottom, rgba(43,43,49,0) 0%,rgba(43,43,49,1) 100%)
+	.container
+		position relative
+		z-index 3
+	&__title
+		color $white
+		font-weight 300
+		font-size 28px
+		margin-bottom 20px
+		b
+			font-weight 700
+	&__wrap
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+	&__devices
+		margin-top 30px
+	&__devices-title
+		font-size 14px
+		display block
+		color rgba($white, .5)
+		font-family 'Open Sans', sans-serif
+	&__devices-list
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		li
+			display flex
+			flex-direction column
+			justify-content flex-start
+			align-items center
+			margin-right 20px
+			color rgba($white, .75)
+			&:last-child
+				margin-right 0
+			i
+				font-size 40px
+				&:before
+					background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+					-webkit-background-clip text
+					-webkit-text-fill-color transparent
+					color $clr2
+			span
+				font-size 14px
+				font-weight 300
+	&__share
+		margin-top 30px
+	&__share-title
+		font-size 14px
+		display block
+		color rgba($white, .5)
+		font-family 'Open Sans', sans-serif
+		margin-bottom 5px
+	&__share-list
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items flex-start
+		li
+			margin-right 20px
+			&:last-child
+				margin-right 0
+			i
+				font-size 24px
+			&.facebook
+				a
+					color #3b5999
+			&.instagram
+				a
+					color $clr2
+					i
+						&:before
+							background radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)
+							-webkit-background-clip text
+							-webkit-text-fill-color transparent
+							color $clr2
+			&.twitter
+				a
+					color #1da1f2
+			&.vk
+				a
+					color #45668e
+	@media (min-width: 576px)
+		&__title
+			font-size 30px
+	@media (min-width: 768px)
+		margin-top 90px
+		&__title
+			font-size 32px
+		&__wrap
+			flex-direction row
+			justify-content space-between
+			align-items flex-end
+			margin-top 30px
+		&__share
+		&__devices
+			margin-top 0
+	@media (min-width: 992px)
+		&__title
+			line-height 100%
+			margin-bottom 30px
+	@media (min-width: 1200px)
+		padding 70px 0
+		&__title
+			font-size 36px
+
+/*==============================
+	FAQ
+==============================*/
+.faq
+	display block
+	margin-bottom 40px
+	&__title
+		color $white
+		font-weight 400
+		font-size 24px
+		margin-bottom 10px
+	&__text
+		font-size 16px
+		line-height 26px
+		margin-bottom 15px
+		color rgba($white, .7)
+		font-family 'Open Sans', sans-serif
+		letter-spacing .2px
+		b
+			font-weight 600
+		&:last-child
+			margin-bottom 0
+	@media (min-width: 768px)
+		margin-bottom 50px
+		margin-top 15px
+		&:last-child
+			margin-bottom 15px
+	@media (min-width: 992px)
+		padding 0 20px 0 0
+	@media (min-width: 1200px)
+		margin-bottom 60px
+		&:last-child
+			margin-bottom 15px
+
+/*==============================
+	How
+==============================*/
+.how
+	display block
+	margin 15px 0
+	&__number
+		font-size 50px
+		line-height 100%
+		font-weight 700
+		margin-bottom 10px
+		display inline-block
+		background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+		-webkit-background-clip text
+		-webkit-text-fill-color transparent
+		color $clr2
+	&__title
+		font-size 18px
+		font-weight 500
+		color $white
+		margin-bottom 10px
+	&__text
+		color rgba($white, .7)
+		font-size 15px
+		line-height 25px
+		font-family 'Open Sans', sans-serif
+		margin 0
+		letter-spacing .2px
+		b
+			font-weight 600
+	@media (min-width: 992px)
+		margin 20px 0
+
+/*==============================
+	Partners
+==============================*/
+.partner
+	display block
+	margin 15px 0
+	&__img
+		max-width 100%
+		margin 0 auto
+		display block
+		transition(.4s ease)
+		opacity .75
+	&:hover
+		.partner__img
+			opacity 1
+	@media (min-width: 992px)
+		margin 20px 0
+
+/*==============================
+	Price
+==============================*/
+.price
+	display flex
+	flex-direction column
+	justify-content flex-start
+	align-items flex-start
+	padding 20px 15px
+	background-color $blue1
+	box-shadow(0 0 20px 0 rgba($black, .3))
+	margin 15px 0
+	position relative
+	&--premium
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		.price__item
+			&:before
+				background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	&--profile
+		margin 0 0 30px
+	&__item
+		display flex
+		flex-direction row
+		justify-content space-between
+		align-items center
+		width 100%
+		font-size 15px
+		color rgba($white, .7)
+		margin-top 10px
+		padding-top 10px
+		border-top 1px solid rgba($white, .05)
+		position relative
+		padding-left 15px
+		font-family 'Open Sans', sans-serif
+		&:before
+			content ''
+			position absolute
+			display block
+			width 4px
+			height 4px
+			border-radius(50%)
+			background-color rgba($white, .5)
+			left 0
+			top 50%
+			margin-top 4px
+		&--first
+			font-size 24px
+			font-weight 400
+			margin-bottom 5px
+			margin-top 0
+			padding-top 0
+			border none
+			color $white
+			padding-left 0
+			&:before
+				display none
+			span
+				&:last-child
+					font-weight 500
+					background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+					-webkit-background-clip text
+					-webkit-text-fill-color transparent
+					color $clr2
+		&:nth-child(2)
+			border none
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 100%
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin-top 20px
+		&:hover
+			opacity 1
+			color $white
+	@media (min-width: 576px)
+		padding 25px 20px
+		&__btn
+			margin-top 25px
+	@media (min-width: 990px)
+		&--profile
+			margin 0 0 50px
+	@media (min-width: 1200px)
+		padding 25px
+
+.plan-features
+	margin-top 15px
+	li
+		position relative
+		font-size 15px
+		color $white
+		padding-left 40px
+		line-height 26px
+		margin-bottom 15px
+		font-family 'Open Sans', sans-serif
+		&:before
+			content '\f3ff'
+			font-family "Ionicons"
+			position absolute
+			top 0
+			left 15px
+			background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+			-webkit-background-clip text
+			-webkit-text-fill-color transparent
+			color $clr2
+			font-size 28px
+			line-height 26px
+	@media (min-width: 768px)
+		margin-bottom 30px
+		margin-top 0
+
+/*==============================
+	Feature
+==============================*/
+.feature
+	display block
+	position relative
+	margin 15px 0
+	padding-left 65px
+	&__icon
+		display block
+		position absolute
+		top -10px
+		left 0
+		font-size 46px
+		&:before
+			background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+			-webkit-background-clip text
+			-webkit-text-fill-color transparent
+			color $clr2
+	&__title
+		color $white
+		display block
+		font-size 18px
+		font-weight 500
+		margin-bottom 10px
+	&__text
+		display block
+		color rgba($white, .7)
+		font-size 15px
+		line-height 25px
+		font-family 'Open Sans', sans-serif
+		margin 0
+		letter-spacing .2px
+	@media (min-width: 992px)
+		padding-right 15px
+		margin 25px 0 20px
+
+/*==============================
+	Catalog
+==============================*/
+.catalog
+	padding 0 0 20px
+	@media (min-width: 768px)
+		padding 0 0 45px
+
+/*==============================
+	Filter
+==============================*/
+.filter
+	background-color $blue2
+	box-shadow(0 5px 25px 0 rgba($black, .3))
+	margin-bottom 30px
+	&__item
+		position relative
+		margin-bottom 20px
+	&__item-label
+		font-size 12px
+		display block
+		color rgba($white, .5)
+		font-weight 300
+		letter-spacing .2px
+	&__item-btn
+		display inline-flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		cursor pointer
+		height 30px
+		transition(.4s ease)
+		input
+			display block
+			position relative
+			width auto
+			background-color transparent
+			border none
+			font-size 16px
+			color $white
+			cursor pointer
+			height 30px
+			margin-right 12px
+			font-weight 500
+		span
+			position relative
+			width 16px
+			height 16px
+			display block
+			margin-top 1px
+			&:before
+			&:after
+				content ''
+				position absolute
+				display block
+				width 16px
+				height 2px
+				background-color $white
+				left 0
+				border-radius(4px)
+				top 50%
+				transition(.4s ease)
+				margin-top -5px
+				opacity .75
+			&:after
+				margin-top 2px
+				width 10px
+		&[aria-expanded="true"]
+			span
+				&:before
+				&:after
+					opacity 1
+				&:before
+					transform(rotate(45deg))
+					margin-top -1px
+				&:after
+					margin-top -1px
+					width 16px
+					transform(rotate(-45deg))
+		&:hover
+			span
+				&:before
+				&:after
+					opacity 1
+	&__item-menu
+		top 100%
+		left 0
+		margin-top 0
+		min-width 200px
+		padding 15px 20px
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		background-color $blue1
+		display block
+		transition(.4s ease)
+		position absolute
+		z-index 100
+		pointer-events none
+		opacity 0
+		max-height 190px
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+		li
+			display block
+			line-height 40px
+			font-size 14px
+			color rgba($white, .75)
+			position relative
+			text-transform uppercase
+			font-weight 300
+			cursor pointer
+			transition(.4s ease)
+			&:hover
+				color $clr1
+		&.show
+			pointer-events auto
+			opacity 1
+			margin-top 10px
+	&__content
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+		padding 20px 0
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 48px
+		width 140px
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		&:hover
+			opacity 1
+			color $white
+	&__range
+		font-size 16px
+		color $white
+		margin-right 12px
+		height 30px
+		font-weight 500
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		position relative
+		div
+			position relative
+			&:first-child
+				margin-right 14px
+				&:after
+					content '-'
+					position absolute
+					display block
+					left 100%
+					top 0
+					color $white
+					font-size 16px
+					font-weight 500
+					margin-left 4px
+	@media (min-width: 768px)
+		margin-bottom 50px
+	@media (min-width: 992px)
+		&__content
+			flex-direction row
+			justify-content space-between
+			align-items center
+			padding 0
+			height 90px
+		&__items
+			display flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+		&__item
+			margin-bottom 0
+			margin-right 50px
+		&__item-menu
+			margin-top 10px
+			&.show
+				margin-top 20px
+	@media (min-width: 1200px)
+		&__item
+			margin-right 60px
+
+/* range slider */
+.noUi-target
+	background $blue2
+	border-radius(4px)
+	border none
+	box-shadow(none)
+
+.noUi-horizontal
+	height 4px
+	margin 10px 0
+
+.noUi-connects
+	background-color rgba($white, .05)
+	border-radius(0)
+	border none
+
+.noUi-connect
+	background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+
+.noUi-handle
+	border none
+	border-radius(50%)
+	cursor pointer
+	&:before
+	&:after
+		display none
+	&:focus
+		outline none
+	&.noUi-handle-lower
+		background-color $clr1
+		box-shadow(0 0 20px 0 rgba($clr1, .5))
+	&.noUi-handle-upper
+		background-color $clr2
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+
+.noUi-horizontal .noUi-handle
+	width 16px
+	height 16px
+
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle
+	right -8px
+
+/*==============================
+	Paginator
+==============================*/
+.paginator
+	display flex
+	flex-direction row
+	justify-content center
+	align-items center
+	margin 20px auto 30px
+	background-color $blue1
+	box-shadow(0 0 20px 0 rgba($black, .3))
+	border-radius(4px)
+	height 50px
+	width 290px
+	&__item
+		margin 0
+		a
+			font-size 16px
+			height 50px
+			width 50px
+			display block
+			line-height 50px
+			color rgba($white, .5)
+			text-align center
+			border-radius(4px)
+		&:hover
+			a
+				color $white
+		&--prev
+		&--next
+			display block
+			position relative
+			height 50px
+			transition(.4s ease)
+			a
+				font-size 18px
+		&--active
+			a
+				color $white
+				cursor default
+				font-weight 500
+				background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				box-shadow(0 0 20px 0 rgba($clr2, .5))
+				&:hover
+					color $white
+	@media (min-width: 360px)
+		width 300px
+	@media (min-width: 768px)
+		margin 30px auto
+		&--list
+			margin 10px auto 30px
+	@media (min-width: 1200px)
+		&--list
+			margin 20px auto 30px
+
+/*==============================
+	Comments
+==============================*/
+.comments
+	margin-bottom 50px
+	&__autor
+		display block
+		position relative
+		padding-left 55px
+		margin-bottom 15px
+	&__avatar
+		position absolute
+		top 0
+		left 0
+		width 40px
+		border-radius(50%)
+	&__name
+		display block
+		font-size 16px
+		color $white
+		line-height 20px
+		font-weight 400
+	&__time
+		display block
+		font-size 13px
+		color rgba($white, .5)
+		line-height 20px
+		font-weight 300
+		font-family 'Open Sans', sans-serif
+	&__text
+		display block
+		margin 0
+		color rgba($white, .7)
+		font-size 15px
+		line-height 25px
+		background-color $blue2
+		padding 20px
+		position relative
+		font-family 'Open Sans', sans-serif
+		letter-spacing .2px
+		span
+			display block
+			background-color $blue1
+			margin-bottom 20px
+			padding 20px
+			position relative
+			min-height 80px
+			&:before
+				content '\f1f5'
+				position absolute
+				display block
+				font-family "Ionicons"
+				background-image -webkit-linear-gradient(0deg, rgba($clr1, .12) 0%, rgba($clr2, .12) 100%)
+				-webkit-background-clip text
+				-webkit-text-fill-color transparent
+				color $clr2
+				font-size 64px
+				top 10px
+				left 15px
+				line-height 100%
+	&__item
+		margin-bottom 30px
+		display block
+		&--answer
+		&--quote
+			margin-left 25px
+	&__actions
+		display flex
+		flex-direction row
+		justify-content flex-end
+		align-items center
+		background-color $blue2
+		padding 15px 20px
+		border-top 1px solid rgba($white, .05)
+		position relative
+		button
+			display flex
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			font-size 12px
+			color rgba($white, .5)
+			margin-right 20px
+			height 22px
+			text-transform uppercase
+			font-weight 300
+			i
+				margin-right 5px
+			&:hover
+				color $clr1
+			&:last-child
+				margin-right 0
+	&__rate
+		display inline-flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		position absolute
+		left 20px
+		top 50%
+		margin-top -15px
+		button
+			display flex
+			flex-direction row
+			justify-content center
+			align-items center
+			color rgba($white, .5)
+			font-size 13px
+			margin-right 25px
+			position relative
+			height 30px
+			i
+				font-size 18px
+				opacity .5
+				transition(.4s ease)
+			&:last-child
+				margin-right 0
+				i
+					margin-left 6px
+					color #c22b3c
+			&:first-child
+				i
+					margin-right 6px
+					color #0cb457
+				&:before
+					content ''
+					position absolute
+					display block
+					left 100%
+					margin-left 12px
+					width 1px
+					height 15px
+					background-color rgba($white, .05)
+					top 50%
+					transform(translateY(-50%))
+			&:hover
+				color rgba($white, .5)
+				i
+					opacity 1
+	@media (min-width: 768px)
+		&__item
+			&--answer
+			&--quote
+				margin-left 55px
+	@media (min-width: 992px)
+		margin-bottom 45px
+		padding-right 20px
+
+/*==============================
+	Reviews
+==============================*/
+.reviews
+	margin-bottom 40px
+	&__autor
+		display block
+		position relative
+		padding-left 55px
+		margin-bottom 15px
+		padding-right 60px
+	&__avatar
+		position absolute
+		top 0
+		left 0
+		width 40px
+		border-radius(50%)
+	&__name
+		display block
+		font-size 16px
+		color $white
+		line-height 20px
+		font-weight 400
+		margin-bottom 5px
+	&__time
+		display block
+		font-size 13px
+		color rgba($white, .5)
+		font-weight 300
+		line-height 20px
+	&__text
+		display block
+		margin 0
+		color rgba($white, .7)
+		font-size 15px
+		line-height 25px
+		background-color $blue2
+		padding 20px
+		font-family 'Open Sans', sans-serif
+		letter-spacing .2px
+	&__item
+		margin-bottom 30px
+		display block
+		&--answer
+			margin-left 55px
+	&__rating
+		font-size 16px
+		font-weight 500
+		color $white
+		position absolute
+		display inline-flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		right 0
+		top 8px
+		i
+			text-shadow 0 0 6px rgba(255, 88, 96, 0.5)
+			margin-right 5px
+			&:before
+				background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+				-webkit-background-clip text
+				-webkit-text-fill-color transparent
+				color $clr2
+	@media (min-width: 576px)
+		&__name
+			margin-bottom 0
+	@media (min-width: 992px)
+		margin-bottom 30px
+		padding-right 20px
+
+/*==============================
+	Form
+==============================*/
+.form
+	background-color $blue2
+	padding 20px
+	&__input
+		border none
+		height 50px
+		color $white
+		padding 0 20px
+		letter-spacing .2px
+		background-color $blue1
+		margin-bottom 20px
+		width 100%
+		font-family 'Open Sans', sans-serif
+		font-size 15px
+	&__textarea
+		border none
+		height 150px
+		position relative
+		color $white
+		font-size 15px
+		width 100%
+		color $white
+		padding 15px 20px
+		letter-spacing .2px
+		resize none
+		background-color $blue1
+		font-family 'Open Sans', sans-serif
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 160px
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin 20px 0 0 0
+		&:hover
+			opacity 1
+			color $white
+	&__slider
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		margin-top 40px
+		position relative
+		&:before
+			content 'Rate:'
+			position absolute
+			bottom 100%
+			left 0
+			display block
+			color rgba($white, .5)
+			font-size 15px
+			height 20px
+			line-height 20px
+			font-family 'Open Sans', sans-serif
+	&__slider-rating
+		width 160px
+		margin-right 20px
+		.noUi-connects
+			background-color rgba($white, .05)
+		.noUi-handle.noUi-handle-lower
+			background-color $clr2
+			box-shadow(0 0 20px 0 rgba($clr2, .5))
+	&__slider-value
+		font-size 16px
+		color $white
+		font-weight 500
+	&--contacts
+		margin-bottom 40px
+	@media (min-width: 768px)
+		&--contacts
+			margin-bottom 0
+
+/*==============================
+	Gallery
+==============================*/
+.gallery
+	margin-bottom 20px
+	figure
+		margin 0 0 30px
+		a
+			display block
+			position relative
+			overflow hidden
+			transition(.4s ease)
+		img
+			width 100%
+	figcaption
+		display none
+	@media (min-width: 992px)
+		margin-bottom 35px
+		padding-right 20px
+
+/*==============================
+	Accordion
+==============================*/
+.accordion
+	background-color $blue2
+	padding 20px
+	overflow hidden
+	max-height 303px
+	height 303px
+	&__card
+		background-color $blue1
+		margin-bottom 20px
+		&:last-child
+			margin-bottom 0
+		.card-header
+			button
+				width 100%
+				text-align left
+				padding 10px 45px 10px 15px
+				position relative
+				span
+					display block
+					&:first-child
+						color $white
+						font-size 18px
+						font-weight 300
+						transition(.4s ease)
+						margin 0
+					&:last-child
+						color rgba($white, .5)
+						margin 0
+						font-family 'Open Sans', sans-serif
+						font-size 14px
+				&:before
+					content '\f3d0'
+					font-family "Ionicons"
+					position absolute
+					display block
+					background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+					-webkit-background-clip text
+					-webkit-text-fill-color transparent
+					color $clr2
+					font-size 24px
+					right 15px
+					top 50%
+					height 40px
+					line-height 40px
+					margin-top -20px
+					transition(.4s ease)
+				&[aria-expanded="true"]
+					&:before
+						transform(rotate(180deg))
+					span
+						&:first-child
+							color $clr1
+				&:hover
+					span
+						&:first-child
+							color $clr1
+		.card-body
+			padding 10px 15px
+			border-top 1px solid rgba($white, .05)
+	&__list
+		width 100%
+		thead
+			tr
+				border-bottom 1px solid rgba($white, .05)
+			th
+				color rgba($white, .7)
+				font-size 14px
+				font-weight 400
+				padding 5px 10px
+				font-family 'Open Sans', sans-serif
+		tbody
+			tr
+				border-bottom 1px solid rgba($white, .05)
+				cursor pointer
+				&:hover
+					background-color rgba($white, .01)
+				&:last-child
+					border-bottom none
+			th
+			td
+				color rgba($white, .5)
+				font-size 14px
+				padding 5px 10px 5px
+				font-family 'Open Sans', sans-serif
+	@media (min-width: 1200px)
+		max-height 303px
+		height 303px
+
+/*==============================
+	Footer
+==============================*/
+.footer
+	background-color $blue2
+	display block
+	position relative
+	overflow hidden
+	padding 40px 0 30px
+	box-shadow(0 5px 25px 0 rgba($black, .3))
+	&:before
+		content ''
+		position absolute
+		top 0
+		left 0
+		right 0
+		height 2px
+		display block
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+	&__title
+		color $white
+		font-size 16px
+		font-weight 500
+		letter-spacing .4px
+		margin-bottom 10px
+		margin-top 15px
+	&__list
+		margin-bottom 15px
+		li
+			margin-bottom 10px
+			font-family 'Open Sans', sans-serif
+			&:last-child
+				margin-bottom 0
+		a
+			font-size 14px
+			color rgba($white, .5)
+			&:hover
+				color $clr1
+	&__app
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		margin-bottom 15px
+		margin-top 15px
+		li
+			margin-right 15px
+			img
+				width 130px
+			&:last-child
+				margin-right 0
+	&__social
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		margin-bottom 15px
+		li
+			margin-right 20px
+			&:last-child
+				margin-left 0
+			&.facebook
+				a
+					color #3b5999
+			&.instagram
+				a
+					color $clr2
+					i
+						&:before
+							background radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)
+							-webkit-background-clip text
+							-webkit-text-fill-color transparent
+							color $clr2
+			&.twitter
+				a
+					color #1da1f2
+			&.vk
+				a
+					color #45668e
+		a
+			font-size 24px
+			color rgba($white, .5)
+			&:hover
+				color $clr1
+	&__copyright
+		display flex
+		flex-direction column
+		justify-content center
+		align-items flex-start
+		margin-top 15px
+		border-top 1px solid rgba($white, .05)
+		padding-top 30px
+		font-family 'Open Sans', sans-serif
+		small
+			color rgba($white, .5)
+			font-size 14px
+			a
+				color rgba($white, .5)
+				&:hover
+					text-decoration underline
+		ul
+			display flex
+			flex-direction row
+			justify-content center
+			align-items flex-start
+			margin-top 10px
+			li
+				margin-right 20px
+				&:last-child
+					margin-right 0
+			a
+				color rgba($white, .5)
+				font-size 14px
+				&:hover
+					color $clr1
+	@media (min-width: 768px)
+		padding 60px 0 30px
+		&__copyright
+			flex-direction row
+			justify-content space-between
+			align-items center
+			margin-top 60px
+			ul
+				margin-top 0
+		&__list
+			a
+				font-size 15px
+		&__app
+			flex-direction column
+			align-items flex-start
+			margin-top 0
+			li
+				margin-right 0
+				margin-bottom 15px
+				img
+					width 140px
+				&:last-child
+					margin-top 0
+					margin-bottom 0
+		&__title
+			margin-bottom 15px
+	@media (min-width: 992px)
+		&__copyright
+			ul
+				li
+					margin-right 30px
+
+/*==============================
+	Sign
+==============================*/
+.sign
+	display block
+	position relative
+	&__content
+		display flex
+		flex-direction row
+		justify-content center
+		align-items center
+		width 100%
+		min-height 100vh
+		padding 40px 0
+	&__form
+		background-color $blue2
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		display flex
+		flex-direction column
+		justify-content center
+		align-items center
+		padding 40px 20px
+		position relative
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+	&__logo
+		margin-bottom 40px
+		a
+			max-width 100%
+			width auto
+		img
+			max-width 172px
+	&__input
+		background-color $blue1
+		border none
+		height 50px
+		position relative
+		color $white
+		font-size 15px
+		width 250px
+		color $white
+		border-radius(0)
+		padding 0 20px
+		letter-spacing .2px
+		font-family 'Open Sans', sans-serif
+	&__group
+		position relative
+		margin-bottom 20px
+		&--checkbox
+			width 100%
+			text-align left
+			input
+				&:not(:checked)
+				&:checked
+					position absolute
+					left -9999px
+				&:not(:checked) + label
+				&:checked + label
+					font-size 14px
+					color rgba($white, .5)
+					font-family 'Open Sans', sans-serif
+					position relative
+					cursor pointer
+					padding-left 34px
+					line-height 22px
+					margin 0
+					a
+						background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+						-webkit-background-clip text
+						-webkit-text-fill-color transparent
+						color $clr2
+						opacity .75
+						&:hover
+							opacity 1
+				&:not(:checked) + label:before
+				&:checked + label:before
+					content ''
+					position absolute
+					left 0
+					top 0
+					width 20px
+					height 20px
+					background-color $blue1
+				&:not(:checked) + label:after
+				&:checked + label:after
+					font-family 'Ionicons'
+					content '\f3ff'
+					position absolute
+					left 0
+					top 0
+					width 20px
+					height 20px
+					font-size 20px
+					line-height 20px
+					text-align center
+					transition(.4s)
+					color $clr1
+				&:not(:checked) + label:after
+					opacity 0
+					transform(scale(0))
+				&:checked + label:after
+					opacity 1
+					transform(scale(1))
+			label
+				&::-moz-selection
+					background transparent
+					color rgba($white, .5)
+				&::selection
+					background transparent
+					color rgba($white, .5)
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 100%
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin 20px auto 0
+		&:hover
+			opacity 1
+			color $white
+	&__text
+		margin-top 20px
+		font-size 14px
+		color rgba($white, .5)
+		font-family 'Open Sans', sans-serif
+		a
+			position relative
+			background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+			-webkit-background-clip text
+			-webkit-text-fill-color transparent
+			color $clr2
+			opacity .8
+			&:hover
+				opacity 1
+	@media (min-width: 360px)
+		&__input
+			width 280px
+	@media (min-width: 768px)
+		&__form
+			padding 50px 60px
+		&__logo
+			margin-bottom 50px
+
+/*==============================
+	Page 404
+==============================*/
+.page-404
+	display block
+	position relative
+	&__wrap
+		display flex
+		flex-direction row
+		justify-content center
+		align-items center
+		width 100%
+		min-height 100vh
+		padding 40px 0
+	&__content
+		background-color $blue1
+		box-shadow(0 5px 25px 0 rgba($black, .3))
+		display flex
+		flex-direction column
+		justify-content center
+		align-items center
+		padding 40px 0
+		position relative
+		width 100%
+		max-width 400px
+		&:before
+			content ''
+			position absolute
+			top 0
+			left 0
+			right 0
+			height 2px
+			display block
+			background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+	&__title
+		position relative
+		background-image -webkit-linear-gradient(0deg, $clr1 0%, $clr2 100%)
+		-webkit-background-clip text
+		-webkit-text-fill-color transparent
+		color $clr2
+		line-height 100%
+		font-size 80px
+		margin-bottom 15px
+		text-shadow 0 12px 64px rgba($clr2, .35)
+	&__text
+		text-align center
+		display block
+		width 100%
+		padding 0 20px
+		color rgba($white, .7)
+		font-size 15px
+		line-height 25px
+		font-family 'Open Sans', sans-serif
+		margin-bottom 20px
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 160px
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin 20px auto 0
+		&:hover
+			opacity 1
+			color $white
+	@media (min-width: 768px)
+		&__content
+			padding 50px 0
+		&__title
+			font-size 100px
+
+/*==============================
+	Profile
+==============================*/
+.profile
+	background-color $blue2
+	box-shadow(0 5px 25px 0 rgba($black, .3))
+	margin-bottom 30px
+	&__content
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+		padding 20px 0
+	&__user
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		margin-bottom 10px
+	&__meta
+		display flex
+		flex-direction column
+		justify-content flex-start
+		align-items flex-start
+		h3
+			color $white
+			display block
+			font-size 16px
+			font-weight 500
+			margin-bottom 2px
+		span
+			font-family 'Open Sans', sans-serif
+			color rgba($white, .5)
+			font-size 14px
+	&__avatar
+		display block
+		position relative
+		width 50px
+		cursor pointer
+		overflow hidden
+		border-radius(50%)
+		margin-right 15px
+		img
+			width 100%
+	&__logout
+		display flex
+		justify-content center
+		align-items center
+		height 40px
+		width 40px
+		border-radius(4px)
+		background-color rgba($white, .05)
+		box-shadow(0 0 20px 0 rgba($black, .15))
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		opacity .85
+		position absolute
+		top 25px
+		right 15px
+		&:hover
+			opacity 1
+			color $white
+		span
+			display none
+		i
+			color $white
+			font-size 24px
+	&__form
+		background-color $blue2
+		padding 20px 15px
+		margin-bottom 30px
+		box-shadow(0 0 20px 0 rgba($black, .3))
+	&__title
+		color $white
+		display block
+		font-size 16px
+		font-weight 500
+		margin-bottom 20px
+	&__group
+		position relative
+		margin-bottom 20px
+	&__label
+		letter-spacing .2px
+		font-family 'Open Sans', sans-serif
+		color rgba($white, .75)
+		font-size 15px
+		margin-bottom 10px
+	&__input
+		background-color $blue1
+		border none
+		height 50px
+		position relative
+		color $white
+		font-size 15px
+		width 100%
+		color $white
+		border-radius(0)
+		padding 0 20px
+		letter-spacing .2px
+		font-family 'Open Sans', sans-serif
+	&__btn
+		display flex
+		justify-content center
+		align-items center
+		height 50px
+		width 100%
+		border-radius(4px)
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba($clr2, .5))
+		opacity .85
+		font-size 13px
+		color $white
+		text-transform uppercase
+		font-weight 500
+		letter-spacing 1px
+		margin 10px auto 0
+		&:hover
+			opacity 1
+			color $white
+	@media (min-width: 360px)
+		&__form
+			padding 20px
+	@media (min-width: 768px)
+		margin-bottom 50px
+		&__content
+			flex-direction row
+			justify-content flex-start
+			align-items center
+			padding 0
+			height 90px
+		&__user
+			width 210px
+			margin-bottom 0
+			margin-right 35px
+		&__logout
+			margin-left auto
+			margin-top 0
+			height 50px
+			width 140px
+			position relative
+			top auto
+			right auto
+			i
+				display none
+			span
+				display block
+		&__form
+			padding 30px 20px
+			margin-bottom 50px
+		&__title
+			margin-bottom 25px
+		&__btn
+			width 140px
+			margin 10px 0 0
+	@media (min-width: 992px)
+		&__form
+			padding 30px
+	@media (min-width: 1200px)
+		&__user
+			width 240px
+			margin-right 50px
+
+/*==============================
+	Contacts
+==============================*/
+.contacts
+	&__list
+		margin-bottom 15px
+		li
+			margin-bottom 10px
+			font-family 'Open Sans', sans-serif
+			&:last-child
+				margin-bottom 0
+		a
+			font-size 15px
+			color rgba($white, .5)
+			&:hover
+				color $clr1
+	&__social
+		display flex
+		flex-direction row
+		justify-content flex-start
+		align-items center
+		li
+			margin-right 20px
+			&:last-child
+				margin-left 0
+			&.facebook
+				a
+					color #3b5999
+			&.instagram
+				a
+					color $clr2
+					i
+						&:before
+							background radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)
+							-webkit-background-clip text
+							-webkit-text-fill-color transparent
+							color $clr2
+			&.twitter
+				a
+					color #1da1f2
+			&.vk
+				a
+					color #45668e
+		a
+			font-size 24px
+			color rgba($white, .5)
+			&:hover
+				color $clr1
+
+/*==============================
+	Plyr customization
+==============================*/
+.plyr
+	font-family 'Ubuntu', sans-serif
+	font-weight 300
+
+.plyr__menu__container .plyr__control
+	transition(0s ease)
+	
+.plyr__control--overlaid
+	background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	box-shadow(none)
+	padding 20px
+	transition(.4s ease)
+	&:hover
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		box-shadow(0 0 20px 0 rgba(255, 88, 96, 0.5))
+
+.plyr__control.plyr__control--overlaid
+	border-radius(50%)
+
+.plyr--video .plyr__control.plyr__tab-focus,
+.plyr--video .plyr__control:hover,
+.plyr--video .plyr__control[aria-expanded="true"]
+		background none
+		background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+		background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+
+.plyr--video .plyr__progress__buffer
+	box-shadow(none)
+
+.plyr__progress__buffer
+	border-radius(0)
+
+.plyr--full-ui input[type="range"]
+	color $clr1
+	border-radius(0)
+
+.plyr__tab-focus
+	box-shadow(none)
+	outline none
+
+.plyr__tooltip
+	font-weight 300
+
+.plyr__control.plyr__tab-focus
+	box-shadow(none)
+
+.plyr__menu__container .plyr__control[role="menuitemradio"][aria-checked="true"]::before
+	background none
+	background-image -moz-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -webkit-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image -ms-linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+	background-image linear-gradient( 90deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+
+.plyr__control
+	border-radius(4px)
+
+.plyr--video .plyr__control svg
+	filter none
+
+/*==============================
+	PhotoSwipe customization
+==============================*/
+.pswp__bg
+	background-color rgba($blue1, .8)
+	
+.pswp__ui--fit .pswp__top-bar
+.pswp__ui--fit .pswp__caption
+	background-color transparent
+
+.pswp__caption__center
+	font-size 16px
+	color $white
+	padding 15px
+	font-weight 300
+
+.pswp__counter
+	font-size 14px
+	color $white
+	padding 0 15px
+	font-weight 300
+
+.pswp__button--close
+	background none
+	&:before
+		content '\f2c0'
+		font-family "Ionicons"
+		position absolute
+		display block
+		font-size 28px
+		color $white
+		top 50%
+		left 50%
+		transform(translateX(-50%), translateY(-50%))
+
+.pswp__button--fs
+	background none
+	&:before
+		content '\f2e7'
+		font-family "Ionicons"
+		position absolute
+		display block
+		font-size 24px
+		color $white
+		top 50%
+		left 50%
+		transform(translateX(-50%), translateY(-50%))
+
+.pswp--fs .pswp__button--fs
+	&:before
+		content '\f2d8'
+
+.pswp__button--arrow--right
+.pswp__button--arrow--left
+	&:before
+		font-family "Ionicons"
+		position absolute
+		display block
+		font-size 24px
+		color $white
+		top 50%
+		left 50%
+		transform(translateX(-50%), translateY(-50%))
+		width 50px
+		height 50px
+		line-height 50px
+		text-align center
+		background none
+		background-color $blue2
+
+.pswp__button--arrow--left
+	&:before
+		content '\f27d'
+
+.pswp__button--arrow--right
+	&:before
+		content '\f287'
+
+/*==============================
+	mCustomScrollbar customization
+==============================*/
+/* scroll bar 1 */
+.mCS-custom-bar
+	opacity 1
+	&.mCSB_outside + .mCSB_scrollTools
+		right 2px
+		top 15px
+		bottom 15px
+	&.mCSB_scrollTools
+		.mCSB_draggerRail
+			background-color rgba($white, .05)
+		.mCSB_dragger
+			.mCSB_dragger_bar
+				background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				width 2px
+				border-radius(0)
+			&:hover
+				.mCSB_dragger_bar
+					background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			&:active
+			&.mCSB_dragger_onDrag
+				.mCSB_dragger_bar
+					background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+
+/* scroll bar 2 */
+.mCS-custom-bar2
+	opacity 1
+	&.mCSB_outside + .mCSB_scrollTools
+		right 2px
+		top 20px
+		bottom 20px
+	&.mCSB_scrollTools
+		.mCSB_draggerRail
+			background-color rgba($white, .05)
+		.mCSB_dragger
+			.mCSB_dragger_bar
+				background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+				width 2px
+				border-radius(0)
+			&:hover
+				.mCSB_dragger_bar
+					background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+			&:active
+			&.mCSB_dragger_onDrag
+				.mCSB_dragger_bar
+					background-image -moz-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -webkit-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image -ms-linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)
+					background-image linear-gradient( 180deg, rgb(255,85,165) 0%, rgb(255,88,96) 100%)

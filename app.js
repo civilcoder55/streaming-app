@@ -43,11 +43,20 @@ app.use(passport.session());
 app.use(require("csurf")());
 // inject csrf token in response locals to access it form views
 app.use((req, res, next) => {
-  res.locals.csrfToken = req.csrfToken();
-  res.locals.req = req;
-  next();
+    res.locals.csrfToken = req.csrfToken();
+    res.locals.req = req;
+    next();
 });
 
+
+
+//register routes
+app.use("/", require("./router"));
+app.use((req, res, next) => res.status(404).render("general/error", { status: 404, title: "Page Not Found" }));
+app.use((err, req, res, next) => {
+    console.log(err);
+    return res.status(500).render("general/error", { status: 500, title: "Internal Server Error" });
+});
 
 
 
