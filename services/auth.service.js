@@ -8,18 +8,16 @@ const User = require("../models/user.model");
 
 
 
-
-
-module.exports = {
+module.exports = class AuthService {
     async checkIfUserExists(email, username) {
         return await User.findOne({
             where: { [Op.or]: [{ username }, { email }] },
         });
-    },
+    }
 
     async createUser(email, username, password) {
         const user = await User.create({ email, username, password });
-    },
+    }
 
     async generateResetToken(email) {
         const user = await User.findOne({ where: { email } });
@@ -36,7 +34,7 @@ module.exports = {
             // mailer.send(msg);
             console.log(token)
         }
-    },
+    }
 
     async verifyResetToken(token) {
         try {
@@ -49,7 +47,5 @@ module.exports = {
             return false
         }
         return false
-    },
-
-
+    }
 }

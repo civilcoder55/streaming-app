@@ -1,23 +1,26 @@
 //required services
-const authService = require("../services/auth.service")
+const AuthService = require("../services/auth.service")
+const authService = new AuthService()
 
-
-
-module.exports = {
+module.exports = class AuthController {
     getLogin(req, res) {
         return res.render("auth/signin", { title: 'Sign in', messages: req.flash() });
-    },
+    }
+
     getRegister(req, res) {
         return res.render("auth/signup", { title: 'Sign up', messages: req.flash() });
-    },
+    }
+
     getForget(req, res) {
         return res.render("auth/forget", { title: 'Forget Password', messages: req.flash() });
-    },
+    }
+
     login(req, res) {
         req.body.remember == "on" ? (req.session.cookie.maxAge = 2 * 24 * 3600000) : (req.session.cookie.expires = false);
         return res.redirect("/");
-    },
-    async register(req, res) {
+    }
+
+    register(req, res) {
         const { email, username, password } = req.body;
         const userExist = await authService.checkIfUserExists(email, username)
 
@@ -29,17 +32,20 @@ module.exports = {
         const user = await authService.createUser(email, username, password)
 
         req.login(user, () => res.redirect("/"));
-    },
+    }
+
     logout(req, res) {
         req.logout();
         req.session.destroy(() => res.redirect("/"));
-    },
-    async forgetPassword(req, res) {
+    }
+
+    forgetPassword(req, res) {
         await authService.generateResetToken(req.body.email)
         req.flash("success", "if you have email , then message with reset link will be sent to you ");
         return res.redirect("/forgot");
-    },
-    async getResetPassword(req, res) {
+    }
+
+    getResetPassword(req, res) {
         const token = req.params.token;
         if (token) {
             const isValid = await authService.verifyResetToken(token)
@@ -48,8 +54,9 @@ module.exports = {
             }
         }
         return res.send("reset link is invalid or expired");
-    },
-    async resetPassword(req, res) {
+    }
+
+    resetPassword(req, res) {
         const token = req.params.token;
         const { password } = req.body;
         if (token) {
@@ -64,4 +71,3 @@ module.exports = {
         return res.send("reset link is invalid or expired");
     }
 }
-
