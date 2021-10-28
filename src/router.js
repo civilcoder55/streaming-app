@@ -5,6 +5,8 @@ const passport = require("./utils/passport.util");
 
 // register all routes 
 router.use(require("./routes/auth.route")(passport));
+router.use(require("./routes/movie.route"));
+router.use('/admin', require("./routes/admin.route"));
 
 
 module.exports = router;

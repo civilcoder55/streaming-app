@@ -20,7 +20,7 @@ module.exports = class AuthController {
         return res.redirect("/");
     }
 
-    register(req, res) {
+    async register(req, res) {
         const { email, username, password } = req.body;
         const userExist = await authService.checkIfUserExists(email, username)
 
@@ -39,13 +39,13 @@ module.exports = class AuthController {
         req.session.destroy(() => res.redirect("/"));
     }
 
-    forgetPassword(req, res) {
+    async forgetPassword(req, res) {
         await authService.generateResetToken(req.body.email)
         req.flash("success", "if you have email , then message with reset link will be sent to you ");
         return res.redirect("/forgot");
     }
 
-    getResetPassword(req, res) {
+    async getResetPassword(req, res) {
         const token = req.params.token;
         if (token) {
             const isValid = await authService.verifyResetToken(token)
@@ -56,7 +56,7 @@ module.exports = class AuthController {
         return res.send("reset link is invalid or expired");
     }
 
-    resetPassword(req, res) {
+    async resetPassword(req, res) {
         const token = req.params.token;
         const { password } = req.body;
         if (token) {

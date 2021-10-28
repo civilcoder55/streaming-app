@@ -1,3 +1,4 @@
+// required packages 
 const Sequelize = require("sequelize");
 const sequelizeClient = require("../database/sequelize");
 const bcrypt = require("bcrypt");

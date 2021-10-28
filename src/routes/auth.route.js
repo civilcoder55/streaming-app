@@ -11,7 +11,7 @@ const requireAuth = require("../middlewares/requireAuth.middleware");
 const validateBody = require("../middlewares/validateBody.middleware");
 
 // required validation schema
-const authSchema = require("../schemas/auth.validator");
+const authSchema = require("../schemas/auth.schema");
 
 
 module.exports = function (passport) {

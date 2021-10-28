@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="/css/select2.min.css" />
+    <link rel="stylesheet" href="/css/ionicons.min.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/icon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Admin | <%= title %></title>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="header__content">
+        <!-- header logo -->
+        <a href="/" class="header__logo">
+          <img src="/img/logo.svg" alt="" />
+        </a>
+        <!-- end header logo -->
+
+        <!-- header menu btn -->
+        <button class="header__btn" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <!-- end header menu btn -->
+      </div>
+    </header>
+    <!-- end header -->
+
+    <!-- sidebar -->
+    <div class="sidebar">
+      <!-- sidebar logo -->
+      <a href="/" class="sidebar__logo">
+        <img src="/img/logo.svg" alt="" />
+      </a>
+      <!-- end sidebar logo -->
+
+      <!-- sidebar user -->
+      <div class="sidebar__user">
+        <div class="sidebar__user-img">
+          <img src="/img/user.svg" alt="" />
+        </div>
+
+        <div class="sidebar__user-title">
+          <span>Admin</span>
+          <p><%= req.user.username %></p>
+        </div>
+
+        <button class="sidebar__user-btn" type="button" onclick="window.location='/logout'">
+          <i class="icon ion-ios-log-out"></i>
+        </button>
+      </div>
+      <!-- end sidebar user -->
+
+      <!-- sidebar nav -->
+      <ul class="sidebar__nav">
+        <li class="sidebar__nav-item">
+          <a href="/admin/movies/add" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i>Add Movie</a>
+        </li>
+        <li class="sidebar__nav-item">
+          <a href="/admin/genres" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i>Genres</a>
+        </li>
+        <li class="sidebar__nav-item">
+          <a href="/admin/movies" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i>Movies</a>
+        </li>
+        <li class="sidebar__nav-item">
+          <a href="/admin/queue" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i>Queue</a>
+        </li>
+      </ul>
+      <!-- end sidebar nav -->
+    </div>
+    <!-- end sidebar -->
+  </body>
+</html>

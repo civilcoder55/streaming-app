@@ -5,8 +5,11 @@ const sequelizeClient = require("./database/sequelize")
 
 
 
-// start database then express app
+// import database relationships 
+const relationships = require("./database/relationships")
 
+
+// start database then express app
 sequelizeClient.sync().then(() => {
     console.log(`Database connected`)
     app.listen(config.app.port, () => {
