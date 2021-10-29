@@ -3,3 +3,6 @@ node_modules/
 .env
 temp/
 package-lock.json
+src/public/img/posters/*
+src/public/img/covers/*
+src/public/img/screenshots/*

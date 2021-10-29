@@ -1,6 +1,6 @@
 // required packages
 const router = require("express").Router();
-// const uploader = require("../utils/uploader");
+const uploader = require("../utils/uploader.util");
 
 // required controllers
 const AdminMovieController = require("../controllers/admin/movie.controller");
@@ -11,17 +11,17 @@ const requireAdmin = require("../middlewares/requireAdmin.middleware");
 const validateBody = require("../middlewares/validateBody.middleware");
 
 // required validation schema
-const addMovieSchema = require("../schemas/addMovie.schema");
+const movieSchema = require("../schemas/movie.schema");
 
 
 
 
 router.get("/movies", requireAdmin, adminMovieController.index);
-// router.get("/movies/add", requireAdmin, adminMovieController.create);
-// router.post("/movies/add", requireAdmin, uploader, validateBody(addMovieSchema), adminMovieController.store);
-// router.get("/movies/edit/:id", requireAdmin, adminMovieController.edit);
-// router.post("/movies/edit/:id", requireAdmin, uploader, validateBody(addMovieSchema), adminMovieController.update);
-// router.post("/movies/delete/:id", requireAdmin, adminMovieController.delete);
+router.get("/movies/add", requireAdmin, adminMovieController.create);
+router.post("/movies/add", requireAdmin, uploader, validateBody(movieSchema.store), adminMovieController.store);
+router.get("/movies/edit/:id", requireAdmin, adminMovieController.edit);
+router.post("/movies/edit/:id", requireAdmin, uploader, validateBody(movieSchema.update), adminMovieController.update);
+router.post("/movies/delete/:id", requireAdmin, adminMovieController.delete);
 // router.post("/movies/download/:id", requireAdmin, adminMovieController.downloadMovie);
 
 // router.get("/genres", requireAdmin, adminController.listGenres);
