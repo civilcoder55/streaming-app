@@ -2,8 +2,7 @@
 const router = require("express").Router();
 
 // required controllers
-const AuthController = require("../controllers/auth.controller");
-const authController = new AuthController()
+const authController = new (require("../controllers/auth.controller"))()
 
 // required middlewares
 const redirectAuth = require("../middlewares/redirectAuth.middleware");

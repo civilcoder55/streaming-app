@@ -1,6 +1,5 @@
 //required services
-const AdminMovieService = require("../../services/admin/movie.service")
-const adminMovieService = new AdminMovieService()
+const adminMovieService = new (require("../../services/admin/movie.service"))()
 
 module.exports = class AdminMovieController {
 

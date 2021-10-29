@@ -1,6 +1,5 @@
 //required services
-const AuthService = require("../services/auth.service")
-const authService = new AuthService()
+const authService = new (require("../services/auth.service"))()
 
 module.exports = class AuthController {
     getLogin(req, res) {

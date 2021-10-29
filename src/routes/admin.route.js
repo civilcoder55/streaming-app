@@ -3,10 +3,8 @@ const router = require("express").Router();
 const uploader = require("../utils/uploader.util");
 
 // required controllers
-const AdminMovieController = require("../controllers/admin/movie.controller");
-const AdminGenreController = require("../controllers/admin/genre.controller");
-const adminMovieController = new AdminMovieController()
-const adminGenreController = new AdminGenreController()
+const adminMovieController = new (require("../controllers/admin/movie.controller"))()
+const adminGenreController = new (require("../controllers/admin/genre.controller"))()
 
 
 // required middlewares

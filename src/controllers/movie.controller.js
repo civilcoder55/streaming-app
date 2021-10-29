@@ -2,8 +2,7 @@
 const config = require("../config")
 
 //required services
-const MovieService = require("../services/movie.service")
-const movieService = new MovieService()
+const movieService = new (require("../services/movie.service"))()
 
 module.exports = class MovieController {
     async home(req, res) {

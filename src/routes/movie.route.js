@@ -2,8 +2,7 @@
 const router = require("express").Router();
 
 // required controllers
-const MovieController = require("../controllers/movie.controller");
-const movieController = new MovieController()
+const movieController = new (require("../controllers/movie.controller"))()
 
 // required middlewares
 

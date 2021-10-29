@@ -1,6 +1,5 @@
 //required services
-const AdminGenreService = require("../../services/admin/genre.service")
-const adminGenreService = new AdminGenreService()
+const adminGenreService = new (require("../../services/admin/genre.service"))()
 
 module.exports = class AdminGenreController {
 
