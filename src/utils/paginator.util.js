@@ -8,10 +8,10 @@ module.exports = async function ({ model, limit, page, filter }) {
     const hasOther = pages > 1 ? true : false;
     const hasNext = page < pages && hasOther ? true : false;
     const hasPerv = page > 1 && hasOther ? true : false;
+    const offset = (page - 1) * limit;
     if (page > pages) {
         page = pages;
     }
-    const offset = (page - 1) * limit;
     const records = await model.findAll({
         subQuery: false,
         where: filter,

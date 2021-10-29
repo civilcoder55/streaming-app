@@ -365,15 +365,22 @@
 								})
 							});
 							const data = await res.json()
-							if(data.result){
+							if (data.result) {
 								const movie = JSON.parse(data.result)
 								document.querySelector('input[name="title"]').value = movie.title
 								document.querySelector('textarea[name="description"]').value = movie.description
 								document.querySelector('input[name="year"]').value = movie.year
 								document.querySelector('input[name="rate"]').value = movie.rate
 								document.querySelector('input[name="duration"]').value = movie.duration
+
+								movie.genre.forEach(g => {
+									if (document.querySelector(`option[value='${g}']`)) {
+										document.querySelector(`option[value='${g}']`).selected = true
+									}
+								});
+
 							}
-							
+
 						}
 					})
 			</script>
