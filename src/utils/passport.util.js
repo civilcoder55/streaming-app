@@ -1,10 +1,12 @@
 // reqired packages
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("../models/user.model");
 const Op = require("sequelize").Op;
 
-
+// required Models 
+const User = require("../models/user.model");
+const Subscription = require("../models/subscription.model");
+const Plan = require("../models/plan.model");
 
 // config passport local strategy to authenticate user
 passport.use(
@@ -42,6 +44,12 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(async function (id, done) {
     try {
         let user = await User.findOne({
+            include: [
+                {
+                    model: Subscription,
+                    include: [Plan],
+                },
+            ],
             where: { id },
         });
         user = user.get({ plain: true });

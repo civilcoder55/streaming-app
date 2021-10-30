@@ -1,9 +1,10 @@
-// register seeders 
-
+// required seeders
 const genreSeeder = require("../seeders/genre.seeder")
+const planSeeder = require("../seeders/plan.seeder")
 
 
-const seeders = [genreSeeder]
+// register seeders 
+const seeders = [genreSeeder, planSeeder]
 
 module.exports = function () {
     console.log("Seeding database started")
