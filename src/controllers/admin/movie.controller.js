@@ -5,7 +5,7 @@ module.exports = class AdminMovieController {
 
     async index(req, res) {
         const page = req.query.page;
-        const paginator = await adminMovieService.getMoviePaginator({ limit: 6, page, filter: {} });
+        const paginator = await adminMovieService.getMoviePaginator({ limit: 10, page });
         return res.render("admin/movies/index", { paginator });
     }
 
@@ -27,12 +27,12 @@ module.exports = class AdminMovieController {
 
     async edit(req, res) {
         const id = req.params.id
-        const { movie, movieGenres } = await adminMovieService.getMovieData(id)
+        const movie = await adminMovieService.getMovieData(id)
         if (!movie) {
             return res.render("general/error", { status: 404, title: "Movie Not Found" });
         }
         const genres = await adminMovieService.getAllGenres()
-        return res.render("admin/movies/edit", { movie, genres, movieGenres, messages: req.flash() });
+        return res.render("admin/movies/edit", { movie, genres, messages: req.flash() });
     }
 
     async update(req, res) {

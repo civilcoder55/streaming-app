@@ -4,7 +4,6 @@ const config = require("./config");
 const sequelizeClient = require("./database/sequelize")
 
 
-
 // import database relationships 
 const relationships = require("./database/relationships")
 

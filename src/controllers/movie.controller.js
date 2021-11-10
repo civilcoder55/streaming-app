@@ -1,6 +1,7 @@
 // required packages
 const config = require("../config")
 
+
 //required services
 const movieService = new (require("../services/movie.service"))()
 
@@ -11,17 +12,21 @@ module.exports = class MovieController {
     }
 
     async index(req, res) {
-        // const page = req.query.page;
+        const page = req.query.page;
         // const { filter, templateFilter } = await MoviesFilter(req.query);
-        // var paginator = await MoviesPaginator({ limit: 6, page, filter });
-        // var genres = await Genre.findAll({ raw: true });
+        const genres = await movieService.getAllGenres()
 
-        // res.render("movies", {
-        //     paginator,
-        //     genres,
-        //     templateFilter,
-        //     title: "Browse Movies",
-        // });
+        // const result = await movieService.queryMovies(page)
+        // console.log(result?.body?.hits?.total?.value)
+        // console.log(result?.body?.hits?.hits)
+
+        const paginator = await movieService.getMoviePaginator({ limit: 24, page });
+
+        res.render("user/movies", {
+            paginator,
+            genres,
+            title: "Browse All Movies",
+        });
     }
 
     async show(req, res) {

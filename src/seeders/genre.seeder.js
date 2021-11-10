@@ -2,15 +2,14 @@
 const Genre = require("../models/genre.model");
 
 
-const genres = ["Action",
-    "Comedy",
-    "Drama",
-    "Fantasy",
-    "Horror",
-    "Mystery",
-    "Romance",
-    "Thriller",
-    "Western"
+const genres = [
+    "Action", "Adventure", "Animation", "Biography",
+    "Comedy", "Crime", "Documentary", "Drama",
+    "Family", "Fantasy", "Film-Noir", "Game-Show",
+    "History", "Horror", "Music", "Musical",
+    "Mystery", "News", "Reality-TV", "Romance",
+    "Sci-Fi", "Sport", "Talk-Show", "Thriller",
+    "War", "Western"
 ]
 
 

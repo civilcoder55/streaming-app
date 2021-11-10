@@ -30,9 +30,7 @@
               <div class="card__content">
                 <h3 class="card__title"><a href="/movie/<%= movie.id %>"><%= movie.title %></a></h3>
                 <span class="card__category">
-                  <% movie.genres.forEach((genre)=>{ %>
-                  <a href="#"><%= genre.title %></a>
-                  <% }) %>
+                  <a href="#"><%= movie.genres %></a>
                 </span>
                 <span class="card__rate"><i class="icon ion-ios-star"></i><%= movie.rate %></span>
               </div>
@@ -118,9 +116,7 @@
                   <div class="card__content">
                     <h3 class="card__title"><a href="/movie/<%= movie.id %>"><%= movie.title %></a></h3>
                     <span class="card__category">
-                      <% movie.genres.forEach((genre)=>{ %>
-                      <a href="#"><%= genre.title %></a>
-                      <% }) %>
+                      <a href="#"><%= movie.genres %></a>
                     </span>
 
                     <div class="card__wrap">
@@ -133,7 +129,7 @@
                     </div>
 
                     <div class="card__description">
-                      <p><%= movie.desc %></p>
+                      <p><%= movie.description %></p>
                     </div>
                   </div>
                 </div>

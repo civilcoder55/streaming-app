@@ -11,8 +11,8 @@ const Genre = require("../../models/genre.model");
 
 
 module.exports = class AdminMovieService {
-    async getMoviePaginator({ limit, page, filter }) {
-        return await paginator({ model: Movie, limit, page, filter })
+    async getMoviePaginator({ limit, page }) {
+        return await paginator({ model: Movie, limit, page, orderBy: [["id", "DESC"]] })
     }
 
     async getAllGenres() {
@@ -30,30 +30,19 @@ module.exports = class AdminMovieService {
         // }
 
         // add genres to the movie
+        let _genres;
         if (genres) {
-            if (!Array.isArray(genres)) {
-                genres = [genres];
-            }
-            for (let i = 0; i < genres.length; i++) {
-                const genre = await Genre.findOne({ where: { title: genres[i] } });
-                await movie.addGenre(genre);
-            }
+            _genres = Array.isArray(genres) ? genres.join(',') : genres
         }
 
 
-        movie.update({ poster: `/img/posters/${movie.id}.png`, cover: `/img/covers/${movie.id}.png` })
+        movie.update({ poster: `/img/posters/${movie.id}.png`, cover: `/img/covers/${movie.id}.png`, genres: _genres })
 
         return movie
     }
 
     async getMovieData(id) {
-        const movie = await Movie.findOne({ where: { id } });
-        if (!movie) {
-            return { movie: null, movieGenres: null }
-        }
-
-        const movieGenres = await movie.getGenres({ raw: true });
-        return { movie, movieGenres }
+        return await Movie.findOne({ where: { id } });
     }
 
     async updateMovie({ id, body, files }) {
@@ -62,21 +51,17 @@ module.exports = class AdminMovieService {
         if (!movie) {
             throw new Error("Movie not found")
         }
-        await movie.update({ title, description, year, country, duration, rate });
 
-        const movieGenres = await movie.getGenres();
-        await movie.removeGenres(movieGenres);
-
-
+        let _genres;
         if (genres) {
-            if (!Array.isArray(genres)) {
-                genres = [genres];
-            }
-            for (let i = 0; i < genres.length; i++) {
-                const genre = await Genre.findOne({ where: { title: genres[i] } });
-                await movie.addGenre(genre);
-            }
+            _genres = Array.isArray(genres) ? genres.join(',') : genres
         }
+        
+        await movie.update({ title, description, year, country, duration, rate, genres: _genres });
+
+
+
+
 
         if (files.cover) {
             imageResizer({ buffer: files.cover[0].buffer, x: 270, y: 400, path: path.join(__dirname, `../../public/img/covers/${movie.id}.png`) });

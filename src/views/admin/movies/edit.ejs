@@ -281,11 +281,11 @@
 											
 											<% genres.forEach((genre)=>{ %>
 											<option value="<%= genre.title %>"><%= genre.title %></option>
-												<% }) %>
-												<% movieGenres.forEach((movieGenre)=>{ %>
-													<script>
-														document.querySelector("option[value='<%= movieGenre.title %>']").setAttribute('selected','selected');
-													</script>
+											<% }) %>
+											<% movie.genres?.split(',').forEach((movieGenre)=>{ %>
+												<script>
+													document.querySelector("option[value='<%= movieGenre %>']").setAttribute('selected','selected');
+												</script>
 											<% }) %>
 												
 										</select>

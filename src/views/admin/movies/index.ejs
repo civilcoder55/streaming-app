@@ -117,7 +117,7 @@
             <!-- paginator -->
             <div class="col-12">
                 <div class="paginator-wrap">
-                    <span><%= ((paginator.page -1) * 10)+ movies.length %> from <%= count %></span>
+                    <span><%= (paginator.page  * 10)  %> from <%= paginator.count %></span>
 
                     <ul class="paginator">
 						<% if(paginator.hasPerv){ %>
