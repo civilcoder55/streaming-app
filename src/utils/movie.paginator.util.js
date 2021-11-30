@@ -1,8 +1,10 @@
-module.exports = async function ({ model, limit, page, orderBy }) {
+const Movie = require('../models/movie.model')
+
+module.exports = async function ({ limit, page, orderBy }) {
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 6;
-    
-    const count = await model.count({});
+
+    const count = await Movie.count({});
     const pages = Math.ceil(count / limit);
     const hasOther = pages > 1 ? true : false;
     const hasNext = page < pages && hasOther ? true : false;
@@ -11,7 +13,7 @@ module.exports = async function ({ model, limit, page, orderBy }) {
     if (page > pages) {
         page = pages;
     }
-    const records = await model.findAll({
+    const records = await Movie.findAll({
         subQuery: false,
         limit: limit,
         offset: offset,

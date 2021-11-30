@@ -1,9 +1,5 @@
 // required packages
-const Op = require("sequelize").Op;
-const random = require("sequelize").random;
-const config = require("../config");
-const elaClient = require("../database/elasticsearch")
-const paginator = require("../utils/paginator.util")
+const paginator = require("../database/elasticsearch");
 
 // required models
 const Movie = require("../models/movie.model");
@@ -28,8 +24,8 @@ module.exports = class MovieService {
         return await Genre.findAll({ raw: true });
     }
 
-    async getMoviePaginator({ limit, page }) {
-        return await paginator({ model: Movie, limit, page, orderBy: [["id", "asc"]] })
+    async getMoviePaginator({ size, page, filter, sort }) {
+        return await paginator({ size, page, filter, sort })
     }
 
     async queryMovies(page) {

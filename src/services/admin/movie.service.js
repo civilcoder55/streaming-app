@@ -1,10 +1,8 @@
 // required packages
-const Op = require("sequelize").Op;
-const random = require("sequelize").random;
-const config = require("../../config");
-const paginator = require("../../utils/paginator.util")
+const moviePaginator = require("../../utils/movie.paginator.util")
 const imageResizer = require("../../utils/resizer.util")
 const path = require("path")
+
 // required models
 const Movie = require("../../models/movie.model");
 const Genre = require("../../models/genre.model");
@@ -12,7 +10,7 @@ const Genre = require("../../models/genre.model");
 
 module.exports = class AdminMovieService {
     async getMoviePaginator({ limit, page }) {
-        return await paginator({ model: Movie, limit, page, orderBy: [["id", "DESC"]] })
+        return await moviePaginator({ limit, page, orderBy: [["id", "DESC"]] })
     }
 
     async getAllGenres() {
@@ -56,7 +54,7 @@ module.exports = class AdminMovieService {
         if (genres) {
             _genres = Array.isArray(genres) ? genres.join(',') : genres
         }
-        
+
         await movie.update({ title, description, year, country, duration, rate, genres: _genres });
 
 

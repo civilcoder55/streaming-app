@@ -121,12 +121,12 @@
 		</div>
 
 		<!-- header search -->
-		<form action="/search" class="header__search">
+		<form action="/movies" class="header__search">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
 						<div class="header__search-content">
-							<input type="text" name='movie' placeholder="Search for a movie, that you are looking for">
+							<input type="text" name='q' value="<%= req.query.q || '' %>" placeholder="Search for a movie, that you are looking for">
 
 							<button type="submit">search</button>
 						</div>

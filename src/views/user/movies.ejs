@@ -7,7 +7,7 @@
       <div class="col-12">
         <div class="section__wrap">
           <!-- section title -->
-          <h2 class="section__title">Movies List</h2>
+          <h2 class="section__title">Movies List <%= req.query.q ? `Contains "${req.query.q}"` : '' %></h2>
           <!-- end section title -->
 
           <!-- breadcrumb -->
@@ -42,8 +42,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-              
-                <input type="button"  id="genre" />
+                <input type="button" id="genre" value="<%= req.query.genre || '' %>" />
                 <span></span>
               </div>
 
@@ -67,7 +66,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <input type="button" id="rate" />
+                <input type="button" id="rate" value="<%= req.query.rate || '' %>" />
                 <span></span>
               </div>
 
@@ -94,23 +93,46 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <input type="button" id="year" />
+                <input type="button" id="year" value="<%= req.query.year || '' %>" />
                 <span></span>
               </div>
 
               <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-year">
-                <% for(let i = 2020 ; i >= 2000 ; i--){ %>
+                <% for(let i=2022 ; i>= 2000 ; i--){ %>
                 <li><%= i %></li>
                 <li><% } %></li>
               </ul>
             </div>
             <!-- end filter item -->
+
+            <div class="filter__item" id="filter__sort">
+              <span class="filter__item-label">Sort by:</span>
+
+              <div
+                class="filter__item-btn dropdown-toggle"
+                role="button"
+                id="filter-sort"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <input id="sort" type="button" value="<%= req.query.sort || 'Recent' %>" />
+                <span></span>
+              </div>
+
+              <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+                <li>Recent</li>
+                <li>Rating</li>
+                <li>Year</li>
+              </ul>
+            </div>
           </div>
           <script>
             function filter() {
               $("#formGenre").attr("value", $("#genre").attr("value"));
               $("#formYear").attr("value", $("#year").attr("value"));
               $("#formRate").attr("value", $("#rate").attr("value"));
+              $("#formSort").attr("value", $("#sort").attr("value"));
               this.submit;
             }
           </script>
@@ -118,6 +140,8 @@
             <input type="hidden" name="genre" id="formGenre" value="" />
             <input type="hidden" name="year" id="formYear" value="" />
             <input type="hidden" name="rate" id="formRate" value="" />
+            <input type="hidden" name="sort" id="formSort" value="" />
+            <input type="hidden" name="q" id="formSearch" value="<%= req.query.q || '' %>" />
             <!-- filter btn -->
             <button class="filter__btn" type="submit" onclick="filter()">apply filter</button>
             <!-- end filter btn -->
@@ -138,17 +162,22 @@
       <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
         <div class="card">
           <div class="card__cover">
-            <img src="/img/covers/<%= movie.id %>.png" alt="" />
-            <a href="/movie/<%= movie.id %>" class="card__play">
+            <img src="<%= movie._source?.cover %>" alt="" />
+            <a href="/movie/<%= movie._source?.id %>" class="card__play">
               <i class="icon ion-ios-play"></i>
             </a>
           </div>
           <div class="card__content">
-            <h3 class="card__title"><a href="/movie/<%= movie.id %>"><%= movie.title %></a></h3>
+            <h3 class="card__title"><a href="/movie/<%= movie._source?.id %>"> <%= movie._source?.title %> </a></h3>
             <span class="card__category">
-              <a href="#"><%= movie.genres %></a>
+              <% movie._source?.genre.forEach((g)=>{ %>
+              <a href="#"> <%= g %> </a>
+              <% }) %>
             </span>
-            <span class="card__rate"><i class="icon ion-ios-star"></i><%= movie.rate %></span>
+            <span class="card__rate"
+              ><i class="icon ion-ios-star"></i>
+              <%= movie._source?.rate %>
+            </span>
           </div>
         </div>
       </div>
@@ -160,25 +189,28 @@
         <ul class="paginator">
           <% if(paginator.hasPerv){ %>
           <li class="paginator__item paginator__item--prev">
-            <a href="?page=<%= (paginator.page - 1) %>"><i class="icon ion-ios-arrow-back"></i></a>
+            <a href="#" onclick="goTo(<%= (paginator.page - 1) %>)"><i class="icon ion-ios-arrow-back"></i></a>
           </li>
-          <% } %> <% if(paginator.pages <= 4 ){ %> <% for(let i = 1 ; i <= paginator.pages ; i++){ %> <% if(paginator.page == i ){ %>
-          <li class="paginator__item paginator__item--active"><a href="?page=<%= i %>"><%= i %></a></li>
+          <% } %> <% if(paginator.pages <=4 ){ %> <% for(let i=1 ; i <=paginator.pages ; i++){ %> <%
+          if(paginator.page==i ){ %>
+          <li class="paginator__item paginator__item--active"><a href="#"> <%= i %> </a></li>
           <% }else{ %>
-          <li class="paginator__item"><a href="?page=<%= i %>"><%= i %></a></li>
-          <% } %> <% } %> <% }else{ %> <% if(paginator.hasPerv ){ %> <% if(paginator.page >= 3 ){ %>
+          <li class="paginator__item"><a href="#" onclick="goTo(<%= i %>)"> <%= i %> </a></li>
+          <% } %> <% } %> <% }else{ %> <% if(paginator.hasPerv ){ %> <% if(paginator.page>= 3 ){ %>
           <li class="paginator__item"><a href="#">..</a></li>
           <% } %>
-          <li class="paginator__item"><a href="?page=<%= (paginator.page -1) %>"><%= (paginator.page -1) %></a></li>
+          <li class="paginator__item"><a href="#" onclick="goTo(<%= (paginator.page - 1) %>)"> <%= (paginator.page -1) %> </a></li>
           <% } %>
-          <li class="paginator__item paginator__item--active"><a href="?page=<%= (paginator.page ) %>"><%= (paginator.page ) %></a></li>
+          <li class="paginator__item paginator__item--active">
+            <a href="#"> <%= (paginator.page ) %> </a>
+          </li>
           <% if(paginator.hasNext ){ %>
-          <li class="paginator__item"><a href="?page=<%= (paginator.page + 1) %>"><%= (paginator.page + 1) %></a></li>
-          <% if(paginator.page != paginator.pages - 1 ){ %>
+          <li class="paginator__item"><a href='#' onclick="goTo(<%= (paginator.page + 1) %>)"> <%= (paginator.page + 1) %> </a></li>
+          <% if(paginator.page !=paginator.pages - 1 ){ %>
           <li class="paginator__item"><a href="#">..</a></li>
           <% } %> <% } %> <% } %> <% if(paginator.hasNext){ %>
           <li class="paginator__item paginator__item--next">
-            <a href="?page=<%= (paginator.page + 1) %>"><i class="icon ion-ios-arrow-forward"></i></a>
+            <a href="#" onclick="goTo(<%= (paginator.page + 1) %>)"><i class="icon ion-ios-arrow-forward"></i></a>
             <% } %>
           </li>
         </ul>
@@ -192,3 +224,11 @@
 <!-- end catalog -->
 
 <%- include('../layout/footer') %>
+
+<script>
+function goTo(page){
+  let href = new URL(window.location.href);
+  href.searchParams.set('page', page);
+  window.location = href.toString()
+}    
+</script>

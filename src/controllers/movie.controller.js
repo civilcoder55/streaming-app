@@ -13,16 +13,20 @@ module.exports = class MovieController {
 
     async index(req, res) {
         const page = req.query.page;
-        // const { filter, templateFilter } = await MoviesFilter(req.query);
+        const filter = {
+            genre: req.query.genre?.trim(),
+            rate: req.query.rate?.trim().replace('+', ''),
+            year: req.query.year?.trim(),
+            q: req.query.q
+        }
+
+        const sort = req.query.sort?.trim()
+
         const genres = await movieService.getAllGenres()
 
-        // const result = await movieService.queryMovies(page)
-        // console.log(result?.body?.hits?.total?.value)
-        // console.log(result?.body?.hits?.hits)
+        const paginator = await movieService.getMoviePaginator({ size: 24, page, filter, sort });
 
-        const paginator = await movieService.getMoviePaginator({ limit: 24, page });
-
-        res.render("user/movies", {
+        return res.render("user/movies", {
             paginator,
             genres,
             title: "Browse All Movies",
