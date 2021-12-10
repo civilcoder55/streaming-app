@@ -1,5 +1,5 @@
 // required packages
-const paginator = require("../database/elasticsearch");
+const paginator = require("../database/elasticsearch/read");
 
 // required models
 const Movie = require("../models/movie.model");

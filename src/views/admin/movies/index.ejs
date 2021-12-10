@@ -93,13 +93,13 @@
                                 </td>
                                 <td>
                                     <div class="main__table-btns">
-                                        <a href="/admin/movies/edit/<%= movie.id %>" class="main__table-btn main__table-btn--edit">
+                                        <a title="edit" href="/admin/movies/edit/<%= movie.id %>" class="main__table-btn main__table-btn--edit" >
                                             <i class="icon ion-ios-create"></i>
                                         </a>
-                                        <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" link="movies/delete/<%= movie.id %>" onclick="function setAction(){document.querySelector('.delete').action =getAttribute('link')}setAction()">
+                                        <a title="delete" href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" link="movies/delete/<%= movie.id %>" onclick="function setAction(){document.querySelector('.delete').action =getAttribute('link')}setAction()">
                                             <i class="icon ion-ios-trash"></i>
                                         </a>
-                                        <a href="#modal-download" class="main__table-btn main__table-btn--banned open-modal" link="movies/download/<%= movie.id %>" onclick="function setAction(){document.querySelector('.download').action =getAttribute('link')}setAction()">
+                                        <a title="download" href="#modal-download" class="main__table-btn main__table-btn--banned open-modal" link="movies/download/<%= movie.id %>" onclick="function setAction(){document.querySelector('.download').action =getAttribute('link')}setAction()">
                                             <i class="icon ion-ios-cloud-download"></i>
                                         </a>
                                     </div>

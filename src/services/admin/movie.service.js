@@ -7,6 +7,10 @@ const path = require("path")
 const Movie = require("../../models/movie.model");
 const Genre = require("../../models/genre.model");
 
+//required elasticsearch 
+const elCreate = require("../../database/elasticsearch/create")
+const elDelete = require("../../database/elasticsearch/delete")
+const elupdate = require("../../database/elasticsearch/update")
 
 module.exports = class AdminMovieService {
     async getMoviePaginator({ limit, page }) {
@@ -35,6 +39,8 @@ module.exports = class AdminMovieService {
 
 
         movie.update({ poster: `/img/posters/${movie.id}.png`, cover: `/img/covers/${movie.id}.png`, genres: _genres })
+
+        await elCreate(movie)
 
         return movie
     }
@@ -69,10 +75,13 @@ module.exports = class AdminMovieService {
             // SubtitleHandler({ buffer: req.files.sub[0].buffer, path: `./data/${movie.id}/${movie.id}.vtt` });
         }
 
+        await elupdate(movie)
         return movie
     }
 
     async deleteMovie(id) {
-        return await Movie.destroy({ where: { id } });
+        await elDelete(id)
+        await Movie.destroy({ where: { id } });
+        return
     }
 }

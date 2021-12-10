@@ -1,9 +1,7 @@
 //required packages
-const { Client } = require('@elastic/elasticsearch')
+const client = require('./client')
 
 
-//init elasticsearch connection
-const client = new Client({ node: 'http://localhost:9200' });
 
 const SORT = {
     "Recent": { id: { order: "desc" } },

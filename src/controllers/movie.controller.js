@@ -11,7 +11,7 @@ module.exports = class MovieController {
         res.render("user/index", { movies, title: "Home" });
     }
 
-    async index(req, res) {
+    async index(req, res, next) {
         const page = req.query.page;
         const filter = {
             genre: req.query.genre?.trim(),
