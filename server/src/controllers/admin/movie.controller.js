@@ -46,4 +46,10 @@ module.exports = class AdminMovieController {
         await adminMovieService.deleteMovie(id)
         return res.redirect("/admin/movies");
     }
+
+    async upload(req, res) {
+        const id = req.params.id
+        await adminMovieService.uploadMovie(id,req.files)
+        return res.redirect("/admin/movies");
+    }
 }

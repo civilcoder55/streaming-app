@@ -83,13 +83,13 @@
                                     <div class="main__table-text"><%= movie.createdAt.toLocaleString()  %></div>
                                 </td>
                                 <td>
-                                    <div class="main__table-text"><% if(movie.queued){ %><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
+                                    <% if(movie.queued){ %><div class="main__table-success-text"><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <div class="main__table-text"><i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
                                 </td>
                                 <td>
-                                    <div class="main__table-text"><% if(movie.downloaded){ %><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
+                                    <% if(movie.downloaded){ %><div class="main__table-success-text"><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <div class="main__table-text"><i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
                                 </td>
                                 <td>
-                                    <div class="main__table-text"><% if(movie.transcoded){ %><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
+                                    <% if(movie.transcoded){ %><div class="main__table-success-text"><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <div class="main__table-text"><i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
                                 </td>
                                 <td>
                                     <div class="main__table-btns">
@@ -99,8 +99,11 @@
                                         <a title="delete" href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" link="movies/delete/<%= movie.id %>" onclick="function setAction(){document.querySelector('.delete').action =getAttribute('link')}setAction()">
                                             <i class="icon ion-ios-trash"></i>
                                         </a>
-                                        <a title="download" href="#modal-download" class="main__table-btn main__table-btn--banned open-modal" link="movies/download/<%= movie.id %>" onclick="function setAction(){document.querySelector('.download').action =getAttribute('link')}setAction()">
+                                        <a title="torrent" href="#modal-torrent" class="main__table-btn main__table-btn--banned open-modal" link="movies/torrent/<%= movie.id %>" onclick="function setAction(){document.querySelector('.torrent').action =getAttribute('link')}setAction()">
                                             <i class="icon ion-ios-cloud-download"></i>
+                                        </a>
+                                        <a title="upload" href="#modal-upload" class="main__table-btn main__table-btn--banned open-modal" link="movies/upload/<%= movie.id %>?_csrf=<%= csrfToken %>" onclick="function setAction(){document.querySelector('.upload').action =getAttribute('link')}setAction()">
+                                            <i class="icon ion-ios-cloud-upload"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -180,27 +183,45 @@
     <div class="modal__btns">
         <form action="#" class="delete" id="delete" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-     </form>
-    <button class="modal__btn modal__btn--apply" type="submit" form="delete">Delete</button>
+        </form>
+        <button class="modal__btn modal__btn--apply" type="submit" form="delete">Delete</button>
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>
 <!-- end modal delete -->
 
 
-<!-- modal download -->
-<div id="modal-download" class="zoom-anim-dialog mfp-hide modal">
-    <h6 class="modal__title">Item download</h6>
-    <form action="#" class="download" id="download" method="POST">
+<!-- modal torrent -->
+<div id="modal-torrent" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Item torrent</h6>
+    <form action="#" class="torrent" id="torrent" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <input class="form__input" type="text" name="torrent" placeholder="Torrent Link">
     </form>
     <div class="modal__btns">
-        <button class="modal__btn modal__btn--apply" type="submit" form="download">Download</button>
+        <button class="modal__btn modal__btn--apply" type="submit" form="torrent">Torrent</button>
         <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
     </div>
 </div>
-<!-- end modal delete -->
+<!-- end modal torrent -->
+
+
+
+<!-- modal upload -->
+<div id="modal-upload" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Item upload</h6>
+    <form action="#" class="upload" id="upload" method="POST" enctype="multipart/form-data">
+        <div class="form__img" style="height: 50px;">
+            <label for="file">Upload media file</label>
+            <input id="file" name="file" type="file" accept=".mp4,.mkv">
+        </div>
+    </form>
+    <div class="modal__btns">
+        <button class="modal__btn modal__btn--apply" type="submit" form="upload">Upload</button>
+        <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+    </div>
+</div>
+<!-- end modal upload -->
 
 <!-- JS -->
 <script src="/js/jquery-3.4.1.min.js"></script>

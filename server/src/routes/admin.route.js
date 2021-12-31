@@ -19,11 +19,11 @@ const movieSchema = require("../schemas/movie.schema");
 
 router.get("/movies", requireAdmin, adminMovieController.index);
 router.get("/movies/add", requireAdmin, adminMovieController.create);
-router.post("/movies/add", requireAdmin, uploader, validateBody(movieSchema.store), adminMovieController.store);
+router.post("/movies/add", requireAdmin, uploader.imageUploader, validateBody(movieSchema.store), adminMovieController.store);
 router.get("/movies/edit/:id", requireAdmin, adminMovieController.edit);
-router.post("/movies/edit/:id", requireAdmin, uploader, validateBody(movieSchema.update), adminMovieController.update);
+router.post("/movies/edit/:id", requireAdmin, uploader.imageUploader, validateBody(movieSchema.update), adminMovieController.update);
 router.post("/movies/delete/:id", requireAdmin, adminMovieController.delete);
-// router.post("/movies/download/:id", requireAdmin, adminMovieController.downloadMovie);
+router.post("/movies/upload/:id", requireAdmin, uploader.movieUploader, adminMovieController.upload);
 
 router.get("/genres", requireAdmin, adminGenreController.index);
 router.post("/genres/add", requireAdmin, adminGenreController.store);

@@ -84,4 +84,12 @@ module.exports = class AdminMovieService {
         await Movie.destroy({ where: { id } });
         return
     }
+
+
+
+    async uploadMovie(id, files) {
+        const movie = await Movie.findOne({ where: { id } });
+        await movie.update({ downloaded: true });
+        return
+    }
 }

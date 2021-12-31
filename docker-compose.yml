@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: streaming-app-mysql
+    ports:
+      - 3002:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "streamingapp"
+    volumes:
+      - ./mysql/data/:/var/lib/mysql
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
+    container_name: streaming-app-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data

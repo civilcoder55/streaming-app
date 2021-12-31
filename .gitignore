@@ -1,13 +1,12 @@
-data/
-node_modules/
-.env
-temp/
-package-lock.json
-src/public/img/posters/*
-src/public/img/covers/*
-src/public/img/screenshots/*
-el-settings.js
-el-test.js
-parse-csv.js
-file.csv
-src/views/user/movies copy.ejs
+server/node_modules/
+server/.env
+media/temp/
+server/package-lock.json
+server/src/public/img/posters/*
+server/src/public/img/covers/*
+server/src/public/img/screenshots/*
+server/el-settings.js
+server/el-test.js
+server/parse-csv.js
+server/file.csv
+server/src/views/user/movies copy.ejs
