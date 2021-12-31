@@ -1,9 +1,7 @@
 // reqired packages
-require("dotenv").config();
-
+require('dotenv').config()
 
 // elasticsearch configs
 module.exports = {
-    node: process.env.ELASTICSEARCH_NODE
-};
-
+  node: process.env.ELASTICSEARCH_NODE
+}

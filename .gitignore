@@ -10,3 +10,4 @@ server/el-test.js
 server/parse-csv.js
 server/file.csv
 server/src/views/user/movies copy.ejs
+server/.eslintrc.json

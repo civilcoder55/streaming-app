@@ -1,10 +1,8 @@
-//required packages
+// required packages
 const { Client } = require('@elastic/elasticsearch')
-const config = require("../../config");
+const config = require('../../config')
 
-//init elasticsearch connection
-const client = new Client({ node: config.elasticsearch.node });
-
+// init elasticsearch connection
+const client = new Client({ node: config.elasticsearch.node })
 
 module.exports = client
-

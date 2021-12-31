@@ -1,32 +1,31 @@
 // required packages
-const router = require("express").Router();
+const router = require('express').Router()
 
 // required controllers
-const authController = new (require("../controllers/auth.controller"))()
+const authController = new (require('../controllers/auth.controller'))()
 
 // required middlewares
-const redirectAuth = require("../middlewares/redirectAuth.middleware");
-const requireAuth = require("../middlewares/requireAuth.middleware");
-const validateBody = require("../middlewares/validateBody.middleware");
+const redirectAuth = require('../middlewares/redirectAuth.middleware')
+const requireAuth = require('../middlewares/requireAuth.middleware')
+const validateBody = require('../middlewares/validateBody.middleware')
 
 // required validation schema
-const authSchema = require("../schemas/auth.schema");
-
+const authSchema = require('../schemas/auth.schema')
 
 module.exports = function (passport) {
-  router.get("/signin", redirectAuth, authController.getLogin);
-  router.get("/signup", redirectAuth, authController.getRegister);
-  router.get("/forgot", redirectAuth, authController.getForget);
-  router.get("/reset/:token", redirectAuth, authController.getResetPassword);
-  router.get("/logout", requireAuth, authController.logout);
+  router.get('/signin', redirectAuth, authController.getLogin)
+  router.get('/signup', redirectAuth, authController.getRegister)
+  router.get('/forgot', redirectAuth, authController.getForget)
+  router.get('/reset/:token', redirectAuth, authController.getResetPassword)
+  router.get('/logout', requireAuth, authController.logout)
   router.post(
-    "/signin",
+    '/signin',
     redirectAuth,
-    passport.authenticate("local", { failureRedirect: "/signin", failureFlash: true }),
+    passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }),
     authController.login
-  );
-  router.post("/signup", redirectAuth, validateBody(authSchema.register), authController.register);
-  router.post("/forgot", redirectAuth, validateBody(authSchema.forgetPassword), authController.forgetPassword);
-  router.post("/reset/:token", redirectAuth, validateBody(authSchema.resetPassword), authController.resetPassword);
-  return router;
-};
+  )
+  router.post('/signup', redirectAuth, validateBody(authSchema.register), authController.register)
+  router.post('/forgot', redirectAuth, validateBody(authSchema.forgetPassword), authController.forgetPassword)
+  router.post('/reset/:token', redirectAuth, validateBody(authSchema.resetPassword), authController.resetPassword)
+  return router
+}

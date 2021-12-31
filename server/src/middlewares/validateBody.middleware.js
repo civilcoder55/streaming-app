@@ -1,15 +1,15 @@
-const { validationResult } = require("express-validator");
+const { validationResult } = require('express-validator')
 
-function validate(req, res, next) {
-  const error = validationResult(req).formatWith(({ msg }) => msg);
+function validate (req, res, next) {
+  const error = validationResult(req).formatWith(({ msg }) => msg)
   if (!error.isEmpty()) {
     console.log(error.array())
-    req.flash("error", error.array());
-    return res.redirect(req.originalUrl);
+    req.flash('error', error.array())
+    return res.redirect(req.originalUrl)
   }
-  next();
+  next()
 }
 module.exports = (validatorList) => {
-  validatorList.push(validate);
-  return validatorList;
-};
+  validatorList.push(validate)
+  return validatorList
+}
