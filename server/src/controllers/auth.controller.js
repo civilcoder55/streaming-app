@@ -16,7 +16,9 @@ module.exports = class AuthController {
 
     login(req, res) {
         req.body.remember == "on" ? (req.session.cookie.maxAge = 2 * 24 * 3600000) : (req.session.cookie.expires = false);
-        return res.redirect("/");
+        req.session.save(() => {
+            return res.redirect("/");
+        })
     }
 
     async register(req, res) {

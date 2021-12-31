@@ -28,7 +28,7 @@ passport.use(
                 return done(null, false, { message: "Incorrect credentials details ." });
             }
         } catch (error) {
-            return done(err);
+            return done(error);
         }
     })
 );
@@ -36,7 +36,7 @@ passport.use(
 
 // config passport serializer
 passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    return done(null, user.id);
 });
 
 
@@ -54,9 +54,9 @@ passport.deserializeUser(async function (id, done) {
         });
         user = user.get({ plain: true });
         delete user.password;
-        done(null, user);
+        return done(null, user);
     } catch (error) {
-        return done(err);
+        return done(error);
     }
 });
 
