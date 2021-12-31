@@ -20,3 +20,14 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+
+  redis:
+    image: redis:latest
+    container_name: streaming-app-redis
+    networks:
+      - streaming-app-network
+
+
+
+networks: 
+    streaming-app-network:
