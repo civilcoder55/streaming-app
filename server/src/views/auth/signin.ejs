@@ -7,40 +7,28 @@
             <!-- authorization form -->
             <form class="sign__form" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-              <% if (Object.keys(messages).length> 0) { %>
-                <script src="/js/swal.js"></script>
-                <script>
-                  <% if (messages.error) { %>
-                    swal("Something is Wrong", "<%- messages.error %>", "error");
-                   <% } %>
-                   <% if (messages.success) { %>
-                    swal("Success", "<%- messages.success[0] %>", "success");
-                    <% } %>
-                </script>
-                <% } %>
+              <a href="/" class="sign__logo">
+                <img src="img/logo.svg" alt="" />
+              </a>
 
-                  <a href="/" class="sign__logo">
-                    <img src="img/logo.svg" alt="" />
-                  </a>
+              <div class="sign__group">
+                <input type="text" class="sign__input" placeholder="Email or Username" name="username" required />
+              </div>
 
-                  <div class="sign__group">
-                    <input type="text" class="sign__input" placeholder="Email or Username" name="username" required />
-                  </div>
+              <div class="sign__group">
+                <input type="password" class="sign__input" placeholder="Password" name="password" required />
+              </div>
 
-                  <div class="sign__group">
-                    <input type="password" class="sign__input" placeholder="Password" name="password" required />
-                  </div>
+              <div class="sign__group sign__group--checkbox">
+                <input id="remember" name="remember" type="checkbox" checked="checked" />
+                <label for="remember">Remember Me</label>
+              </div>
 
-                  <div class="sign__group sign__group--checkbox">
-                    <input id="remember" name="remember" type="checkbox" checked="checked" />
-                    <label for="remember">Remember Me</label>
-                  </div>
+              <button class="sign__btn" type="submit">Sign in</button>
 
-                  <button class="sign__btn" type="submit">Sign in</button>
+              <span class="sign__text">Don't have an account? <a href="/signup">Sign up!</a></span>
 
-                  <span class="sign__text">Don't have an account? <a href="/signup">Sign up!</a></span>
-
-                  <span class="sign__text"><a href="/forgot">Forgot password?</a></span>
+              <span class="sign__text"><a href="/forgot">Forgot password?</a></span>
             </form>
             <!-- end authorization form -->
           </div>

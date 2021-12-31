@@ -21,33 +21,38 @@
 									<div class="col-12 col-sm-6 col-md-12">
 										<div class="form__img">
 											<label for="cover__img-upload">update cover (270 x 400)</label>
-											<input id="cover__img-upload" name="cover" type="file" accept=".png, .jpg, .jpeg" >
+											<input id="cover__img-upload" name="cover" type="file"
+												accept=".png, .jpg, .jpeg">
 											<img id="cover__img" src="<%= movie.cover %>" alt=" ">
 										</div>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-12 col-md-7 form__content">
 								<div class="row">
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="Title" name="title" value="<%= movie.title %>" >
+										<input type="text" class="form__input" placeholder="Title" name="title"
+											value="<%= movie.title %>">
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" name="description" class="form__textarea" placeholder="Description" ><%= movie.description %></textarea>
+										<textarea id="text" name="description" class="form__textarea"
+											placeholder="Description"><%= movie.description %></textarea>
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="Release year" name="year" value="<%= movie.year %>" >
+										<input type="text" class="form__input" placeholder="Release year" name="year"
+											value="<%= movie.year %>">
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="Running timed in minutes" name="duration" value="<%= movie.duration %>" >
+										<input type="text" class="form__input" placeholder="Running timed in minutes"
+											name="duration" value="<%= movie.duration %>">
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<select class="js-example-basic-multiple" id="country"  name="country">
+										<select class="js-example-basic-multiple" id="country" name="country">
 											<option value="Afghanistan">Afghanistan</option>
 											<option value="Åland Islands">Åland Islands</option>
 											<option value="Albania">Albania</option>
@@ -157,7 +162,8 @@
 											<option value="Korea">Korea</option>
 											<option value="Kuwait">Kuwait</option>
 											<option value="Kyrgyzstan">Kyrgyzstan</option>
-											<option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+											<option value="Lao People's Democratic Republic">Lao People's Democratic
+												Republic</option>
 											<option value="Latvia">Latvia</option>
 											<option value="Lebanon">Lebanon</option>
 											<option value="Lesotho">Lesotho</option>
@@ -270,80 +276,66 @@
 											<option value="Zambia">Zambia</option>
 											<option value="Zimbabwe">Zimbabwe</option>
 											<script>
-												document.querySelector("option[value='<%= movie.country %>']").setAttribute('selected','selected');
+												document.querySelector("option[value='<%= movie.country %>']").setAttribute('selected', 'selected');
 											</script>
 										</select>
 									</div>
-									
+
 
 									<div class="col-12 col-lg-6">
-										<select class="js-example-basic-multiple" id="genres" multiple="multiple" name="genres">
-											
+										<select class="js-example-basic-multiple" id="genres" multiple="multiple"
+											name="genres">
+
 											<% genres.forEach((genre)=>{ %>
-											<option value="<%= genre.title %>"><%= genre.title %></option>
-											<% }) %>
-											<% movie.genres?.split(',').forEach((movieGenre)=>{ %>
-												<script>
-													document.querySelector("option[value='<%= movieGenre %>']").setAttribute('selected','selected');
-												</script>
-											<% }) %>
-												
+												<option value="<%= genre.title %>">
+													<%= genre.title %>
+												</option>
+												<% }) %>
+													<% movie.genres?.split(',').forEach((movieGenre)=>{ %>
+														<script>
+															document.querySelector("option[value='<%= movieGenre %>']").setAttribute('selected', 'selected');
+														</script>
+														<% }) %>
+
 										</select>
-										
+
 									</div>
 									<div class="col-12 col-lg-6">
-									<input type="number" class="form__input" placeholder="Rate" name="rate" max="10" min="0" step=".1" value="<%= movie.rate %>" >
-								</div>
-								<div class="col-12">
-									<div class="form__img" style="height: 50px;">
-										<label for="sub" >update srt file</label>
-										<input id="sub" name="sub" type="file" accept=".srt" >
+										<input type="number" class="form__input" placeholder="Rate" name="rate" max="10"
+											min="0" step=".1" value="<%= movie.rate %>">
 									</div>
-								</div>
-								<div class="col-12">
-									<div class="form__img">
-										<label for="poster__img-upload">update poster</label>
-										<input id="poster__img-upload" name="poster" type="file" accept=".png, .jpg, .jpeg" >
-										<img id="poster__img" src="<%= movie.poster %>" alt=" " width="540px" height="308px" >
+									<div class="col-12">
+										<div class="form__img" style="height: 50px;">
+											<label for="sub">update srt file</label>
+											<input id="sub" name="sub" type="file" accept=".srt">
+										</div>
 									</div>
-								</div>
-									
+									<div class="col-12">
+										<div class="form__img">
+											<label for="poster__img-upload">update poster</label>
+											<input id="poster__img-upload" name="poster" type="file"
+												accept=".png, .jpg, .jpeg">
+											<img id="poster__img" src="<%= movie.poster %>" alt=" " width="540px"
+												height="308px">
+										</div>
+									</div>
+
 								</div>
 							</div>
 
-							
 
-									<div class="col-12">
-										<button type="submit" class="form__btn">Update</button>
-									</div>
-								</div>
+
+							<div class="col-12">
+								<button type="submit" class="form__btn">Update</button>
 							</div>
 						</div>
-					</form>
 				</div>
-				<!-- end form -->
 			</div>
+			</form>
+		</div>
+		<!-- end form -->
+		</div>
 		</div>
 	</main>
 	<!-- end main content -->
-	<% if (Object.keys(messages).length > 0) { %>
-		<script src="/js/swal.js"></script>
-		<script>
-		  <% if (messages.error) { %>
-		   swal("Something is Wrong", "<%- messages.error %>", "error");
-		   <% } %>
-		   <% if (messages.success) { %>
-			swal("Success", "<%- messages.success[0] %>", "success");
-			<% } %>
-		</script>
-		<% } %>
-	<!-- JS -->
-	<script src="/js/jquery-3.4.1.min.js"></script>
-	<script src="/js/bootstrap.bundle.min.js"></script>
-	<script src="/js/jquery.magnific-popup.min.js"></script>
-	<script src="/js/jquery.mousewheel.min.js"></script>
-	<script src="/js/jquery.mCustomScrollbar.min.js"></script>
-	<script src="/js/select2.min.js"></script>
-	<script src="/js/admin.js"></script>
-</body>
-</html>
+	<%- include('../../layout/admin/footer.ejs') %>
