@@ -5,7 +5,7 @@ module.exports = class AdminGenreController {
 
     async index(req, res) {
         const genres = await adminGenreService.getAllGenres()
-        return res.render("admin/genres", { genres, messages: req.flash() });
+        return res.render("admin/genres", { genres });
     }
 
     async store(req, res) {

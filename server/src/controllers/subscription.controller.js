@@ -8,7 +8,7 @@ module.exports = class SubscriptionController {
 
     async index(req, res) {
         const plans = await subscriptionService.getAllPlans()
-        return res.render("user/plans", { plans, title: "Plans", messages: req.flash() });
+        return res.render("user/plans", { plans, title: "Plans",  });
     }
 
 

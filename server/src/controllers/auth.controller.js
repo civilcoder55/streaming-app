@@ -3,15 +3,15 @@ const authService = new (require("../services/auth.service"))()
 
 module.exports = class AuthController {
     getLogin(req, res) {
-        return res.render("auth/signin", { title: 'Sign in', messages: req.flash() });
+        return res.render("auth/signin", { title: 'Sign in' });
     }
 
     getRegister(req, res) {
-        return res.render("auth/signup", { title: 'Sign up', messages: req.flash() });
+        return res.render("auth/signup", { title: 'Sign up' });
     }
 
     getForget(req, res) {
-        return res.render("auth/forget", { title: 'Forget Password', messages: req.flash() });
+        return res.render("auth/forget", { title: 'Forget Password' });
     }
 
     login(req, res) {
@@ -49,7 +49,7 @@ module.exports = class AuthController {
         if (token) {
             const isValid = await authService.verifyResetToken(token)
             if (isValid) {
-                return res.render("auth/reset", { title: 'Reset Password', messages: req.flash() });
+                return res.render("auth/reset", { title: 'Reset Password' });
             }
         }
         return res.send("reset link is invalid or expired");

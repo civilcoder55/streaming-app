@@ -11,7 +11,7 @@ module.exports = class AdminMovieController {
 
     async create(req, res) {
         const genres = await adminMovieService.getAllGenres()
-        return res.render("admin/movies/create", { genres, messages: req.flash() });
+        return res.render("admin/movies/create", { genres });
     }
 
     async store(req, res) {
@@ -32,7 +32,7 @@ module.exports = class AdminMovieController {
             return res.render("general/error", { status: 404, title: "Movie Not Found" });
         }
         const genres = await adminMovieService.getAllGenres()
-        return res.render("admin/movies/edit", { movie, genres, messages: req.flash() });
+        return res.render("admin/movies/edit", { movie, genres });
     }
 
     async update(req, res) {
@@ -49,7 +49,7 @@ module.exports = class AdminMovieController {
 
     async upload(req, res) {
         const id = req.params.id
-        await adminMovieService.uploadMovie(id,req.files)
+        await adminMovieService.uploadMovie(id, req.files)
         return res.redirect("/admin/movies");
     }
 }

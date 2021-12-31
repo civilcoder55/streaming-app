@@ -41,10 +41,14 @@ app.use(passport.session());
 
 //register and config csrf middleware
 app.use(require("csurf")());
-// inject csrf token in response locals to access it form views
+
+
+// inject used variables in response locals to access it form views
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
     res.locals.req = req;
+    res.locals.success = req.flash('success')[0];
+    res.locals.errors = req.flash('error')[0];
     next();
 });
 

@@ -1,16 +1,10 @@
-<% if(typeof(messages) != "undefined") { %>
-    <% if (Object.keys(messages).length> 0) { %>
-        <% if (messages.error) { %>
-            <script>
-                swal("Something is Wrong", "<%- messages.error %>", "error");
-            </script>
-            <% } %>
-        <% if (messages.success) { %>
-            <script>
-                swal("Success", "<%- messages.success[0] %>", "success");
-            </script>
-        <% } %>
-    <% } %>
+<% if (errors) { %>
+    <script>
+        swal("Something is Wrong", "<%- errors %>", "error");
+    </script>
 <% } %>
-
-   
+<% if (success) { %>
+    <script>
+        swal("Success", "<%- success %>", "success");
+    </script>
+<% } %>
