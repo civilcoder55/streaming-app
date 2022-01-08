@@ -20,7 +20,7 @@ module.exports = class AuthService {
   async generateResetToken (email) {
     const user = await User.findOne({ where: { email } })
     if (user) {
-      const token = jwt.sign({ id: user.id }, Buffer.from(config.app.secret, 'hex'), { expiresIn: '6h' })
+      const token = jwt.sign({ id: user.id }, config.app.secret, { expiresIn: '6h' })
       await user.update({ resetToken: token })
       // const msg = {
       //     to: user.email,

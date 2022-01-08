@@ -9,6 +9,8 @@ module.exports = async function (movie) {
       title: movie.title,
       year: movie.year,
       rate: movie.rate,
+      poster: movie.poster,
+      cover: movie.cover,
       country: movie.country,
       description: movie.description,
       duration: movie.duration,

@@ -170,7 +170,7 @@
           <div class="card__content">
             <h3 class="card__title"><a href="/movie/<%= movie._source?.id %>"> <%= movie._source?.title %> </a></h3>
             <span class="card__category">
-              <% movie._source?.genre.forEach((g)=>{ %>
+              <% movie._source?.genres?.forEach((g)=>{ %>
               <a href="#"> <%= g %> </a>
               <% }) %>
             </span>

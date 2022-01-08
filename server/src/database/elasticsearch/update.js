@@ -8,12 +8,14 @@ module.exports = async function (movie) {
         {
           conflicts: 'proceed',
           script: {
-            source: 'ctx._source.id=(params.id);ctx._source.title = (params.title);ctx._source.year = (params.year);ctx._source.country = (params.country);ctx._source.rate = (params.rate);ctx._source.description = (params.description);ctx._source.duration = (params.duration);ctx._source.genres = (params.genres);',
+            source: 'ctx._source.id=(params.id);ctx._source.title = (params.title);ctx._source.year = (params.year);ctx._source.country = (params.country);ctx._source.rate = (params.rate);ctx._source.poster = (params.poster);ctx._source.cover = (params.cover);ctx._source.description = (params.description);ctx._source.duration = (params.duration);ctx._source.genres = (params.genres);',
             params: {
               id: movie.id,
               title: movie.title,
               year: movie.year,
               rate: movie.rate,
+              poster: movie.poster,
+              cover: movie.cover,
               country: movie.country,
               description: movie.description,
               duration: movie.duration,

@@ -7,5 +7,6 @@ router.use(require('./routes/auth.route')(passport))
 router.use(require('./routes/movie.route'))
 router.use('/admin', require('./routes/admin.route'))
 router.use(require('./routes/subscription.route'))
+router.use(require('./routes/profile.route'))
 
 module.exports = router

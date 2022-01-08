@@ -1,6 +1,6 @@
-FROM node:16-alpine
+FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/server
 
 # COPY package.json package-lock.json ./
 # RUN npm install 

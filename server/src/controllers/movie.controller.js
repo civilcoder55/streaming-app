@@ -1,5 +1,5 @@
 // required packages
-// const config = require('../config')
+const config = require('../config')
 
 // required services
 const movieService = new (require('../services/movie.service'))()
@@ -46,7 +46,7 @@ module.exports = class MovieController {
       title: movie.title,
       relates: [],
       screenshots: [],
-      url: 'http://127.0.0.1:3005'
+      url: config.app.url
     })
   }
 

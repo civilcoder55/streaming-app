@@ -38,7 +38,7 @@ RUN CONFARGS=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p')\
     unzip "lua-module.zip" -d /usr/src && \
     unzip "luajit2.zip" -d /usr/src && \
     unzip "lua-resty-core.zip" -d /usr/src && \
-    unzip "ua-resty-lrucache.zip" -d /usr/src && \
+    unzip "lua-resty-lrucache.zip" -d /usr/src && \
     export LUAJIT_LIB=/usr/local/luajit/lib && \
     export LUAJIT_INC=/usr/local/luajit/include/luajit-2.1 && \
     cd /usr/src/luajit2-2.1-20211210 && make && make install PREFIX=/usr/local/luajit && \

@@ -39,6 +39,12 @@ const body = {
       duration: {
         enabled: false
       },
+      poster: {
+        enabled: false
+      },
+      cover: {
+        enabled: false
+      },
       rate: {
         type: 'double'
       },

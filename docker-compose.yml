@@ -33,13 +33,15 @@ services:
     build: ./server
     container_name: streaming-app-nodejs
     volumes:
-      - ./server:/usr/src/app
+      - ./server:/usr/src/app/server
+      - ./media:/usr/src/app/media
     networks:
       - streaming-app-network
     depends_on: 
       - mysql
       - elasticsearch
       - redis
+    restart: always
 
   nginx:
     build: ./nginx
