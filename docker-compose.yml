@@ -8,6 +8,8 @@ services:
       MYSQL_DATABASE: "streamingapp"
     volumes:
       - ./mysql/data/:/var/lib/mysql
+    networks:
+      - streaming-app-network
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
@@ -18,12 +20,26 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+    networks:
+      - streaming-app-network
 
   redis:
     image: redis:latest
     container_name: streaming-app-redis
     networks:
       - streaming-app-network
+
+  nodejs:
+    build: ./server
+    container_name: streaming-app-nodejs
+    volumes:
+      - ./server:/usr/src/app
+    networks:
+      - streaming-app-network
+    depends_on: 
+      - mysql
+      - elasticsearch
+      - redis
 
   nginx:
     build: ./nginx
@@ -34,6 +50,10 @@ services:
       - 8080:80
     networks:
       - streaming-app-network
+    depends_on:
+      - nodejs
+
+
 
 networks:
   streaming-app-network:

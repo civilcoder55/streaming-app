@@ -38,8 +38,7 @@ User.prototype.validPassword = function (password) {
 
 // method to hash password before user stored used when Register user
 User.beforeCreate(async (user, options) => {
-  hashedPassword = await bcrypt.hash(user.password(), 12)
-  user.password = hashedPassword
+  user.password = await bcrypt.hash(user.password(), 12)
 })
 
 // create free subscription to user by default
@@ -52,8 +51,7 @@ User.afterCreate(async (user, options) => {
 // method to hash password before user updated used when change/reset password
 User.beforeUpdate(async (user, options) => {
   if (user.changed('password')) {
-    hashedPassword = await bcrypt.hash(user.password(), 12)
-    user.password = hashedPassword
+    user.password = await bcrypt.hash(user.password(), 12)
   }
 })
 
