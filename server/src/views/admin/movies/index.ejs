@@ -60,7 +60,6 @@
                                 <th>TITLE</th>
                                 <th>RATING</th>
                                 <th>CRAETED DATE</th>
-                                <th>Queued</th>
                                 <th>Downloaded</th>
                                 <th>Transcoded</th>
                                 <th style="text-align: unset;">ACTIONS</th>
@@ -83,9 +82,6 @@
                                     <div class="main__table-text"><%= movie.createdAt.toLocaleString()  %></div>
                                 </td>
                                 <td>
-                                    <% if(movie.queued){ %><div class="main__table-success-text"><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <div class="main__table-text"><i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
-                                </td>
-                                <td>
                                     <% if(movie.downloaded){ %><div class="main__table-success-text"><i class="icon ion-ios-checkmark-circle"  style="margin: 0 auto;"></i> <% }else{ %> <div class="main__table-text"><i class="icon ion-ios-close-circle"  style="margin: 0 auto;"></i> <% } %></div>
                                 </td>
                                 <td>
@@ -105,6 +101,11 @@
                                         <a title="upload" href="#modal-upload" class="main__table-btn main__table-btn--banned open-modal" link="movies/upload/<%= movie.id %>?_csrf=<%= csrfToken %>" onclick="function setAction(){document.querySelector('.upload').action =getAttribute('link')}setAction()">
                                             <i class="icon ion-ios-cloud-upload"></i>
                                         </a>
+                                        <% if(movie.tempPath){ %> 
+                                            <a title="transcode" href="#modal-transcode" class="main__table-btn main__table-btn--banned open-modal" link="movies/transcode/<%= movie.id %>?_csrf=<%= csrfToken %>" onclick="function setAction(){document.querySelector('.transcode').action =getAttribute('link')}setAction()">
+                                                <i class="icon ion-ios-settings"></i>
+                                            </a>
+                                        <%} %> 
                                     </div>
                                 </td>
                             </tr>
@@ -222,5 +223,22 @@
     </div>
 </div>
 <!-- end modal upload -->
+
+
+<!-- modal transcode -->
+<div id="modal-transcode" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Item transcode</h6>
+
+    <p class="modal__text">Are you sure to transcode this item , will override any existing data?</p>
+
+    <div class="modal__btns">
+        <form action="#" class="transcode" id="transcode" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+        <button class="modal__btn modal__btn--apply" type="submit" form="transcode">Transcode</button>
+        <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+    </div>
+</div>
+<!-- end modal transcode -->
 
 <%- include('../../layout/admin/footer.ejs') %>

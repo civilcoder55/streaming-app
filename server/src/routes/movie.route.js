@@ -17,5 +17,6 @@ const asyncHandler = function (fn) {
 router.get('/', movieController.home)
 router.get('/movies', asyncHandler(movieController.index))
 router.get('/movie/:id', movieController.show)
+router.get('/movie/master/:id', movieController.master)
 
 module.exports = router

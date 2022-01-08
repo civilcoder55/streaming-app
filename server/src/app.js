@@ -24,13 +24,6 @@ app.use(require('cookie-parser')())
 app.use(
   session({ secret: config.app.secret, resave: false, saveUninitialized: false, store: new SequelizeStore({ db: sequelizeClient }) })
 )
-
-// register session/cookies middlewares
-app.use(express.urlencoded({ extended: false }))
-app.use(require('cookie-parser')())
-app.use(
-  session({ secret: config.app.secret, resave: false, saveUninitialized: false, store: new SequelizeStore({ db: sequelizeClient }) })
-)
 app.use(require('connect-flash')())
 
 // register preconfigured passport authentication middleware

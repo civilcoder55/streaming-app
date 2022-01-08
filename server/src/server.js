@@ -4,10 +4,13 @@ const config = require('./config')
 const sequelizeClient = require('./database/sequelize')
 
 // import database relationships
-const relationships = require('./database/relationships')
+require('./database/relationships')
 
 // import database seeders
 const seeding = require('./database/seeders')
+
+// register queues process
+require('./queues/register')
 
 // start database then express app
 sequelizeClient.sync().then(() => {

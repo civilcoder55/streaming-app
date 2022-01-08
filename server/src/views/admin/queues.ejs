@@ -1,0 +1,117 @@
+<%- include('../layout/admin/header.ejs' , {title:'Queue'}) %>
+    <!-- main content -->
+    <main class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- main title -->
+                <div class="col-12">
+                    <div class="main__title">
+                        <h2>Queue</h2>
+
+                        <span class="main__title-stat"><%= jobs.length %>  Total</span>
+                        
+                    </div>
+                </div>
+                <!-- end main title -->
+
+                <!-- users -->
+                <div class="col-12">
+                    <div class="main__table-wrap">
+                        <table class="main__table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Movie Name</th>
+                                    <th>Progress</th>
+                                    <th>Status</th>
+                                    <th>Started At</th>
+                                    <th>Finished At</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% jobs.forEach((job)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">
+                                                <%= job.id %>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">
+                                                <%= job.data.title %>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text "><%= job._progress.toFixed(2) %> </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text "><%= job.state %> </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text "><%=  (new Date(job.processedOn)).toLocaleString() %> </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text "><%= (new Date(job.finishedOn)).toLocaleString() %> </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-btns">
+                                                <a href="#modal-edit"
+                                                    class="main__table-btn main__table-btn--edit open-modal"
+                                                    link="genres/edit/<%= job.id %>"
+                                                    onclick="function setAction(){document.querySelector('.edit').action =getAttribute('link')}setAction()">
+                                                    <i class="icon ion-ios-create"></i>
+                                                </a>
+                                                <a href="#modal-delete"
+                                                    class="main__table-btn main__table-btn--delete open-modal"
+                                                    link="queue/job/delete/<%= job.id %>"
+                                                    onclick="function setAction(){document.querySelector('.delete').action =getAttribute('link')}setAction()">
+                                                    <i class="icon ion-ios-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end users -->
+
+            </div>
+        </div>
+    </main>
+    <!-- end main content -->
+
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Job delete</h6>
+
+        <p class="modal__text">Are you sure to permanently delete this job?</p>
+
+        <div class="modal__btns">
+            <form action="#" class="delete" id="delete" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </form>
+            <button class="modal__btn modal__btn--apply" type="submit" form="delete">Delete</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+
+    <!-- modal edit -->
+    <div id="modal-edit" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Item edit</h6>
+        <form action="#" class="edit" id="edit" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input class="form__input" type="text" name="title" required placeholder="enter updated title">
+        </form>
+        <div class="modal__btns">
+            <button class="modal__btn modal__btn--apply" type="submit" form="edit">Edit</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+    <%- include('../layout/admin/footer.ejs') %>

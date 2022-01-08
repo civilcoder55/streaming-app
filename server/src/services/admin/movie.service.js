@@ -12,6 +12,9 @@ const elCreate = require('../../database/elasticsearch/create')
 const elDelete = require('../../database/elasticsearch/delete')
 const elupdate = require('../../database/elasticsearch/update')
 
+// required queues
+const { transcodingQueue } = require('../../queues/queue')
+
 module.exports = class AdminMovieService {
   async getMoviePaginator ({ limit, page }) {
     return await moviePaginator({ limit, page, orderBy: [['id', 'DESC']] })
@@ -81,6 +84,12 @@ module.exports = class AdminMovieService {
 
   async uploadMovie (id, files) {
     const movie = await Movie.findOne({ where: { id } })
-    await movie.update({ downloaded: true })
+    await movie.update({ downloaded: true, tempPath: files.file[0].path })
+    transcodingQueue.add({ id: movie.id, title: movie.title, filepath: files.file[0].path, quality: 0 })
+  }
+
+  async transcodeMovie (id) {
+    const movie = await Movie.findOne({ where: { id } })
+    transcodingQueue.add({ id: movie.id, title: movie.title, filepath: movie.tempPath, quality: 0 })
   }
 }

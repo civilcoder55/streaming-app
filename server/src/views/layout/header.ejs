@@ -57,17 +57,21 @@
 									<a class="dropdown-toggle header__nav-link" href="/movies" role="button" aria-haspopup="true" aria-expanded="false">Browse Movies</a>
 								</li>
 								<!-- end dropdown -->
-
-								<li class="header__nav-item">
-									<a href="/plans" class="header__nav-link">Pricing Plan</a>
-								</li>
+								
 								<% if (req.isAuthenticated()) { %>
 									<li class="header__nav-item">
 										<a href="/profile" class="header__nav-link">My Profile</a>
 									</li>
-									
-								  <% }%>
-
+									<% if (req.user.isAdmin) { %>
+										<li class="header__nav-item">
+											<a href="/admin/movies" class="header__nav-link">Admin Panel</a>
+										</li>
+									<% }%>
+								<% }else {%>
+								    <li class="header__nav-item">
+										<a href="/plans" class="header__nav-link">Pricing Plan</a>
+									</li>
+								<% }%>
 							</ul>
 							<!-- end header nav -->
 
@@ -93,7 +97,6 @@
 										<i class="icon ion-ios-log-in"></i>
 										<span>Logout</span>
 									</a>
-									
 								  <% }else{ %>
 									<a href="/signin" class="header__sign-in">
 										<i class="icon ion-ios-log-in"></i>

@@ -13,20 +13,19 @@ module.exports = class AdminGenreController {
     } catch (error) {
       console.log(error)
       req.flash('error', error.message)
-    } finally {
-      return res.redirect('/admin/genres')
     }
+    return res.redirect('/admin/genres')
   }
 
   async update (req, res) {
     try {
       const id = req.params.id
+      const title = req.body.title
       await adminGenreService.updateGenre({ id, title })
     } catch (error) {
       req.flash('error', 'title already exist')
-    } finally {
-      return res.redirect('/admin/genres')
     }
+    return res.redirect('/admin/genres')
   }
 
   async delete (req, res) {

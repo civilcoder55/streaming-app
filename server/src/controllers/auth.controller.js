@@ -15,7 +15,7 @@ module.exports = class AuthController {
   }
 
   login (req, res) {
-    req.body.remember == 'on' ? (req.session.cookie.maxAge = 2 * 24 * 3600000) : (req.session.cookie.expires = false)
+    req.body.remember === 'on' ? (req.session.cookie.maxAge = 2 * 24 * 3600000) : (req.session.cookie.expires = false)
     req.session.save(() => {
       return res.redirect('/')
     })
@@ -26,7 +26,7 @@ module.exports = class AuthController {
     const userExist = await authService.checkIfUserExists(email, username)
 
     if (userExist) {
-      user.username == username ? req.flash('error', 'Username already taken') : req.flash('error', 'Email already taken')
+      userExist.username === username ? req.flash('error', 'Username already taken') : req.flash('error', 'Email already taken')
       return res.redirect('/signup')
     }
 
@@ -43,7 +43,9 @@ module.exports = class AuthController {
   async forgetPassword (req, res) {
     await authService.generateResetToken(req.body.email)
     req.flash('success', 'if you have email , then message with reset link will be sent to you ')
-    return res.redirect('/forgot')
+    req.session.save(() => {
+      return res.redirect('/forgot')
+    })
   }
 
   async getResetPassword (req, res) {

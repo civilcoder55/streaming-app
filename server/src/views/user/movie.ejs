@@ -42,17 +42,17 @@
                 <ul class="card__meta">
                   <li>
                     <span>Genre:</span>
-                    <% movie.genres.forEach((genre)=>{ %>
-                    <a href="#"><%= genre.title %></a>
-                    <% }) %>
+                    <% movie.genres.split(',').forEach((genre)=>{ %>
+                    <a href="#"><%= genre %></a>
+                    <% }) %> 
                   </li>
 
                   <li><span>Release year:</span> <%= movie.year %></li>
-                  <li><span>Running time:</span> <%= movie.time %> min</li>
+                  <li><span>Running time:</span> <%= movie.duration %></li>
                   <li><span>Country:</span> <a href="#"><%= movie.country %></a></li>
                 </ul>
 
-                <div class="card__description card__description--details"><%= movie.desc %></div>
+                <div class="card__description card__description--details"><%= movie.description %></div>
               </div>
             </div>
             <!-- end card content -->
@@ -134,9 +134,7 @@
             <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"
-                    >Photos</a
-                  >
+                  <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Photos</a>
                 </li>
               </ul>
             </div>
@@ -153,7 +151,7 @@
         <!-- content tabs -->
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
-            <<!-- project gallery -->
+            <!-- project gallery -->
             <div class="gallery" itemscope>
               <div class="row">
                 <% for(let i = 0 ; i < screenshots.length ; i++){ %> <% if(i == 0 || i == 1){continue;} %>
@@ -268,7 +266,7 @@
 <script>
   const video = document.querySelector("video");
   document.addEventListener("DOMContentLoaded", () => {
-    const source = "<%= url %>/master/<%= movie.id %>";
+    const source = "<%= url %>/movie/master/<%= movie.id %>";
     if (!Hls.isSupported()) {
       el = document.createElement("source");
       el.src = source;

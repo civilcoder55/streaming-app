@@ -4,6 +4,7 @@ const stripeClient = require('../utils/stripe.util')
 
 // required models
 const Plan = require('../models/plan.model')
+const Subscription = require('../models/subscription.model')
 
 module.exports = class SubscriptionService {
   async getAllPlans () {
@@ -17,11 +18,11 @@ module.exports = class SubscriptionService {
   async subscribeUserToPlan ({ user, plan }) {
     let amount = plan.price * 100
 
-    if (user.subscription.plan.id == plan.id) {
+    if (user.subscription.plan.id === plan.id) {
       return { error: { type: 'warning', message: `You already subscribed to ${plan.type} Package` } }
     } else if (user.subscription.plan.rank > plan.rank) {
       return { error: { type: 'error', message: 'You can\'t downgrade your Package' } }
-    } else if (user.subscription.plan.rank < plan.rank && user.subscription.plan.rank != 0) {
+    } else if (user.subscription.plan.rank < plan.rank && user.subscription.plan.rank !== 0) {
       const dayCost = +(plan.price / 30).toFixed(4)
       const remainingDays = Math.floor((+user.subscription.end - Date.now()) / (1000 * 60 * 60 * 24))
       const discount = +(dayCost * remainingDays).toFixed(2)

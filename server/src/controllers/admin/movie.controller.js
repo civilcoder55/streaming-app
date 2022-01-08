@@ -49,6 +49,18 @@ module.exports = class AdminMovieController {
   async upload (req, res) {
     const id = req.params.id
     await adminMovieService.uploadMovie(id, req.files)
-    return res.redirect('/admin/movies')
+    req.flash('success', `File uploaded for movie with id ${id}`)
+    req.session.save(() => {
+      return res.redirect('/admin/movies')
+    })
+  }
+
+  async transcode (req, res) {
+    const id = req.params.id
+    await adminMovieService.transcodeMovie(id)
+    req.flash('success', `Movie with ${id} added to transcoding queue`)
+    req.session.save(() => {
+      return res.redirect('/admin/movies')
+    })
   }
 }

@@ -18,7 +18,7 @@ const Movie = sequelizeClient.define('movies', {
   genres: { type: Sequelize.STRING },
   cover: { type: Sequelize.STRING, allowNull: true },
   poster: { type: Sequelize.STRING, allowNull: true },
-  queued: { type: Sequelize.BOOLEAN, defaultValue: false },
+  tempPath: { type: Sequelize.STRING, allowNull: true },
   downloaded: { type: Sequelize.BOOLEAN, defaultValue: false },
   transcoded: { type: Sequelize.BOOLEAN, defaultValue: false }
 }, {

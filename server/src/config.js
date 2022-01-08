@@ -4,6 +4,7 @@ const db = require('./configs/db.config')
 const stripe = require('./configs/stripe.config')
 const elasticsearch = require('./configs/elasticsearch.config')
 const redis = require('./configs/redis.config')
+const ffmpeg = require('./configs/ffmpeg.config')
 
 // export all configs as one object
 module.exports = {
@@ -11,5 +12,6 @@ module.exports = {
   db,
   stripe,
   elasticsearch,
-  redis
+  redis,
+  ffmpeg
 }

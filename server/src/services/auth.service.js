@@ -14,13 +14,13 @@ module.exports = class AuthService {
   }
 
   async createUser (email, username, password) {
-    const user = await User.create({ email, username, password })
+    await User.create({ email, username, password })
   }
 
   async generateResetToken (email) {
     const user = await User.findOne({ where: { email } })
     if (user) {
-      const token = jwt.sign({ id: user.id }, config.app.secret, { expiresIn: '6h' })
+      const token = jwt.sign({ id: user.id }, Buffer.from(config.app.secret, 'hex'), { expiresIn: '6h' })
       await user.update({ resetToken: token })
       // const msg = {
       //     to: user.email,
@@ -38,7 +38,7 @@ module.exports = class AuthService {
     try {
       const data = jwt.verify(token, config.app.secret)
       const user = await User.findOne({ where: { id: data.id } })
-      if (token == user.resetToken) {
+      if (token === user.resetToken) {
         return user
       }
     } catch (err) {

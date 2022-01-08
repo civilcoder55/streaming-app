@@ -3,8 +3,6 @@ services:
   mysql:
     image: mysql:latest
     container_name: streaming-app-mysql
-    ports:
-      - 3002:3306
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "streamingapp"
@@ -27,7 +25,15 @@ services:
     networks:
       - streaming-app-network
 
+  nginx:
+    build: ./nginx
+    container_name: streaming-app-nginx
+    volumes:
+      - ./media/data:/usr/src/app/stream
+    ports:
+      - 8080:80
+    networks:
+      - streaming-app-network
 
-
-networks: 
-    streaming-app-network:
+networks:
+  streaming-app-network:
