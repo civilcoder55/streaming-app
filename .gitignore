@@ -1,6 +1,7 @@
 server/node_modules/
 server/.env
-media/temp/
+media/tmp/
+media/data/
 server/package-lock.json
 server/src/public/img/posters/*
 server/src/public/img/covers/*
