@@ -35,25 +35,24 @@ module.exports = class MovieService {
 
     // for basic user load low and sd qualities
     let content = `#EXTM3U
-        #EXT-X-VERSION:4
-        #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=398200,RESOLUTION=426x240,CLOSED-CAPTIONS=NONE
-        ${url}/stream/${id}_0.m3u8
-        #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=687500,RESOLUTION=640x360,CLOSED-CAPTIONS=NONE
-        ${url}/stream/${id}_1.m3u8
-        `
+#EXT-X-VERSION:4
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=398200,RESOLUTION=426x240,CLOSED-CAPTIONS=NONE
+${url}/stream/${id}_0.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=687500,RESOLUTION=640x360,CLOSED-CAPTIONS=NONE
+${url}/stream/${id}_1.m3u8
+`
 
     // if rank == 1 (Premium) or rank == 2 (Cinematic) append hd quality
     if (rank >= 1) {
       content += `#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=1454200,RESOLUTION=1280x720,CLOSED-CAPTIONS=NONE
-        ${url}/stream/${id}_2.m3u8
-        `
+${url}/stream/${id}_2.m3u8
+`
     }
 
     // if rank == 2 (Cinematic) append fhd quality
     if (rank >= 2) {
       content += `#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=2332000,RESOLUTION=1920x1080,CLOSED-CAPTIONS=NONE
-          ${url}/stream/${id}_3.m3u8
-          `
+${url}/stream/${id}_3.m3u8`
     }
 
     return content

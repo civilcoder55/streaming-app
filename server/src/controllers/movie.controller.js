@@ -55,6 +55,7 @@ module.exports = class MovieController {
     const content = await movieService.getMovieMasterContent(id, req.user)
     const cookie = await movieService.getUserMovieStreamAuthKey(req.user)
     res.cookie('auth', cookie, { maxAge: 21600000, httpOnly: true })
+    res.setHeader('Content-Type', 'application/x-mpegURL')
     return res.send(content)
   }
 }

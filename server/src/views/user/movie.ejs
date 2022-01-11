@@ -273,13 +273,17 @@
       el.type = "application/x-mpegURL";
       video.appendChild(el);
       video.className = "video-js";
-      videojs(video, {
+      const player = videojs(video, {
         html5: {
           hls: {
             overrideNative: false,
           },
         },
       });
+      player.on("play", () =>{
+        player.requestFullscreen()
+      });
+
     } else {
       const player = new Plyr(video, { settings: ["captions"], captions: { active: false, update: true, language: "ar" } });
       const hls = new Hls({ autoStartLoad: false });
