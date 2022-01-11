@@ -69,7 +69,7 @@ const buildFilterQuery = ({ genre, rate, year, q }) => {
   }
 
   if (genre) {
-    query.bool.filter.push({ term: { genre: genre } })
+    query.bool.filter.push({ term: { genres: genre } })
   }
   if (rate) {
     query.bool.filter.push({ range: { rate: { gte: rate } } })

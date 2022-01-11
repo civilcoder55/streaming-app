@@ -30,11 +30,9 @@ const body = {
       id: { type: 'keyword' },
       title: {
         type: 'text',
-        fields: {
-          keyword: {
-            type: 'keyword'
-          }
-        }
+        analyzer: 'autocomplete',
+        search_analyzer: 'standard',
+        fields: { keyword: { type: 'keyword' } }
       },
       duration: {
         enabled: false
