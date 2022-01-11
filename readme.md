@@ -10,7 +10,7 @@
 
 ## About The Project
 
-web app built with nodejs to stream video on deamand files in adaptive hls streaming ..
+video on demand adaptive streaming service built with nodejs ..
 
 ## Features
 
@@ -55,10 +55,10 @@ List the ready features in this project:
    ```
 ## TO DO
 
-- [] Add scrapy containter and endpoint
-- [] Add stripe integrations
-- [] Add mail service
-- [] enhance Admin panel Queue 
+- [ ] Add scrapy containter and endpoint
+- [ ] Add stripe integrations
+- [ ] Add mail service
+- [ ] enhance Admin panel Queue 
 
 ## Credits
 html template used in this app was purchased from https://themeforest.net/item/flixgo-online-movies-tv-shows-cinema-html-template/22538349#  
