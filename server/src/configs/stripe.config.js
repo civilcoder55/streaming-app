@@ -5,6 +5,6 @@ require('dotenv').config()
 module.exports = {
   token: process.env.STRIPE_TOKEN,
   secret: process.env.STRIPE_SECRET,
-  success_url: 'http://127.0.0.1:3000/plans',
-  cancel_url: 'http://127.0.0.1:3000/plans'
+  success_url: process.env.SUCCESS_URL,
+  cancel_url: process.env.CANCEL_URL
 }

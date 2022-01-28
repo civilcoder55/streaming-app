@@ -10,7 +10,7 @@ const requireAuth = require('../middlewares/requireAuth.middleware')
 // required validation schema
 
 router.get('/plans', subscriptionController.index)
-router.post('/plan/:id', requireAuth, subscriptionController.subscribe)
+router.get('/plan/:id', requireAuth, subscriptionController.subscribe)
 router.post('/checkout/webhook', subscriptionController.hook)
 
 module.exports = router
