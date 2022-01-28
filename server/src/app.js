@@ -6,6 +6,7 @@ const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sequelizeClient = require('./database/sequelize')
 const passport = require('./utils/passport.util')
+const checkSubMiddleware = require('./middlewares/checkSubs.middleware')
 
 // init express app
 const app = express()
@@ -22,7 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: false }))
 app.use(require('cookie-parser')())
 app.use(
-  session({ secret: config.app.secret, resave: false, saveUninitialized: false, store: new SequelizeStore({ db: sequelizeClient }) })
+  session({
+    secret: config.app.secret,
+    resave: false,
+    saveUninitialized: false,
+    store: new SequelizeStore({ db: sequelizeClient })
+  })
 )
 app.use(require('connect-flash')())
 
@@ -33,6 +39,7 @@ app.use(passport.session())
 // register and config csrf middleware
 app.use(require('csurf')())
 
+// Global middlewares
 // inject used variables in response locals to access it form views
 app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken()
@@ -41,6 +48,8 @@ app.use((req, res, next) => {
   res.locals.errors = req.flash('error')[0]
   next()
 })
+
+app.use(checkSubMiddleware)
 
 // register routes
 app.use('/', require('./router'))
