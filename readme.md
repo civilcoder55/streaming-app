@@ -56,9 +56,10 @@ List the ready features in this project:
 ## TO DO
 
 - [ ] Add scrapy containter and endpoint
-- [ ] Add stripe integrations
+- [x] Add stripe integrations
 - [ ] Add mail service
-- [ ] enhance Admin panel Queue 
+- [ ] Enhance admin panel Queue 
+- [ ] Add more features to the admin panel  
 
 ## Credits
 html template used in this app was purchased from https://themeforest.net/item/flixgo-online-movies-tv-shows-cinema-html-template/22538349#  
