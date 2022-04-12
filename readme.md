@@ -55,7 +55,7 @@ List the ready features in this project:
    ```
 ## TO DO
 
-- [ ] Add scrapy containter and endpoint
+- [x] Add scrapy containter and endpoint
 - [x] Add stripe integrations
 - [ ] Add mail service
 - [ ] Enhance admin panel Queue 
@@ -63,6 +63,7 @@ List the ready features in this project:
 
 ## Credits
 html template used in this app was purchased from https://themeforest.net/item/flixgo-online-movies-tv-shows-cinema-html-template/22538349#  
+
 ## Screenshots
 <h3 align="center">folder structure</h3>
 <p align="center"><img src="fixtures/folder structure.png"></p>
@@ -81,6 +82,8 @@ html template used in this app was purchased from https://themeforest.net/item/f
 <p align="center"><img src="fixtures/11.png"></p>
 <p align="center"><img src="fixtures/12.png"></p>
 <p align="center"><img src="fixtures/13.png"></p>
+<h3 align="center">imdb parser</h3>
+<p align="center"><img src="fixtures/14.gif"></p>
 <br>
 
 <!-- ## TO DO

@@ -344,12 +344,12 @@
 		document.querySelector('#parse').addEventListener('click', async () => {
 			const url = document.querySelector('#parse-url').value
 			if (url) {
-				console.log('started')
-				const res = await fetch('http://localhost:6800/response.json', {
+				const res = await fetch('parse', {
+					headers: {
+						'csrf-token': '<%= csrfToken %>'
+					},
 					method: 'POST',
 					body: new URLSearchParams({
-						'project': 'imdb',
-						'spider': 'movie',
 						'url': url
 					})
 				});
@@ -367,7 +367,10 @@
 							document.querySelector(`option[value='${g}']`).selected = true
 						}
 					});
-
+					// rerender select2
+					$("#genres").select2({
+						placeholder: "Choose genre / genres",
+					});
 				}
 
 			}

@@ -24,6 +24,11 @@ module.exports = class AdminMovieController {
     }
   }
 
+  async parse (req, res) {
+    const response = await adminMovieService.parseImdbMovie({ url: req.body.url })
+    return res.json(response)
+  }
+
   async edit (req, res) {
     const id = req.params.id
     const movie = await adminMovieService.getMovieData(id)

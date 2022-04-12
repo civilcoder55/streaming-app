@@ -2,6 +2,7 @@
 const moviePaginator = require('../../utils/movie.paginator.util')
 const imageResizer = require('../../utils/resizer.util')
 const path = require('path')
+const axios = require('axios')
 
 // required models
 const Movie = require('../../models/movie.model')
@@ -27,8 +28,18 @@ module.exports = class AdminMovieService {
   async createMovie ({ body, files }) {
     const { title, description, year, genres, country, duration, rate } = body
     const movie = await Movie.create({ title, description, year, country, duration, rate })
-    imageResizer({ buffer: files.cover[0].buffer, x: 270, y: 400, path: path.join(__dirname, `../../public/img/covers/${movie.id}.png`) })
-    imageResizer({ buffer: files.poster[0].buffer, x: 540, y: 308, path: path.join(__dirname, `../../public/img/posters/${movie.id}.png`) })
+    imageResizer({
+      buffer: files.cover[0].buffer,
+      x: 270,
+      y: 400,
+      path: path.join(__dirname, `../../public/img/covers/${movie.id}.png`)
+    })
+    imageResizer({
+      buffer: files.poster[0].buffer,
+      x: 540,
+      y: 308,
+      path: path.join(__dirname, `../../public/img/posters/${movie.id}.png`)
+    })
 
     // if (files.sub) {
     //   SubtitleHandler({ buffer: req.files.sub[0].buffer, path: `./data/${movie.id}/${movie.id}.vtt` });
@@ -66,9 +77,19 @@ module.exports = class AdminMovieService {
     await movie.update({ title, description, year, country, duration, rate, genres: _genres })
 
     if (files.cover) {
-      imageResizer({ buffer: files.cover[0].buffer, x: 270, y: 400, path: path.join(__dirname, `../../public/img/covers/${movie.id}.png`) })
+      imageResizer({
+        buffer: files.cover[0].buffer,
+        x: 270,
+        y: 400,
+        path: path.join(__dirname, `../../public/img/covers/${movie.id}.png`)
+      })
     } else if (files.poster) {
-      imageResizer({ buffer: files.poster[0].buffer, x: 540, y: 308, path: path.join(__dirname, `../../public/img/posters/${movie.id}.png`) })
+      imageResizer({
+        buffer: files.poster[0].buffer,
+        x: 540,
+        y: 308,
+        path: path.join(__dirname, `../../public/img/posters/${movie.id}.png`)
+      })
     } else if (files.sub) {
       // SubtitleHandler({ buffer: req.files.sub[0].buffer, path: `./data/${movie.id}/${movie.id}.vtt` });
     }
@@ -91,5 +112,28 @@ module.exports = class AdminMovieService {
   async transcodeMovie (id) {
     const movie = await Movie.findOne({ where: { id } })
     transcodingQueue.add({ id: movie.id, title: movie.title, filepath: movie.tempPath, quality: 0 })
+  }
+
+  async parseImdbMovie ({ url }) {
+    let result = {}
+    try {
+      if (url) {
+        const response = await axios
+          .post('http://scrapy:6800/response.json', `project=imdb&spider=movie&url=${url}`
+            , {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            })
+
+        if (response.data) {
+          result = response.data
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    return result
   }
 }

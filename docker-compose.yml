@@ -55,6 +55,14 @@ services:
     depends_on:
       - nodejs
 
+  scrapy:
+    build: ./scrapy
+    container_name: streaming-app-scrapy
+    volumes:
+      - ./scrapy:/usr/src/app
+    networks:
+      - streaming-app-network
+
 
 
 networks:

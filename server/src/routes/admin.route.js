@@ -21,6 +21,7 @@ router.post('/movies/edit/:id', requireAdmin, uploader.imageUploader, validateBo
 router.post('/movies/delete/:id', requireAdmin, adminMovieController.delete)
 router.post('/movies/upload/:id', requireAdmin, uploader.movieUploader, adminMovieController.upload)
 router.post('/movies/transcode/:id', requireAdmin, adminMovieController.transcode)
+router.post('/movies/parse', requireAdmin, adminMovieController.parse)
 
 router.get('/genres', requireAdmin, adminGenreController.index)
 router.post('/genres/add', requireAdmin, adminGenreController.store)
