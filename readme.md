@@ -10,22 +10,22 @@
 
 ## About The Project
 
-video on demand adaptive streaming service built with nodejs ..
+video-on-demand adaptive streaming service built with node-js.
 
 ## Features
 
 List the ready features in this project:
 
-- Elasticsearch for movie searching, filtering and sorting
-- IMDB scraper for seeding movie details when creating new entry in the admin panel
-- Bull Queue system for queueing transcoding tasks
-- ffmpeg for transcoding .
-- hls adaptive streaming working on ios, andriod and web browsers
-- Nginx as reverse proxy for nodejs application
-- Nginx as media file server
-- Nginx Jwt Module + lua to add authorization for accessing content depending on users subscriptions
-- Stripe as payment gateway .
-- Simple Admin panel to crud movies .
+- Elasticsearch for movie searching, filtering, and sorting.
+- IMDB scraper for seeding movie details when creating new entries in the admin panel.
+- Bull Queue system for queueing transcoding tasks.
+- FFmpeg for transcoding.
+- HLS adaptive streaming working on ios, Andriod and web browsers
+- Nginx as a reverse proxy for node-js application
+- Nginx as a media file server
+- Nginx Jwt Module + Lua to add authorization for accessing content depending on users' subscriptions
+- Stripe as payment gateway.
+- Simple Admin panel to crud movies.
 
 ## Diagram explaining Used Services
 
